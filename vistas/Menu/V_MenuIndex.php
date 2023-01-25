@@ -30,14 +30,8 @@ foreach ($menu as $key => $opcion) {
         echo '</a>';
         echo '<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"  style="background-color: #343a40"; color:white;">';
         foreach ($opcion['hijos'] as $desplegable1) {
-            if ($desplegable1["nombreMenu"] == 'Gestion Usuarios') {
-                echo '<li style="background-color: #343a40"><a class="dropdown-item" onclick="getVista(\'Usuarios\',\'vistaFiltrosUsuarios\');" href="#" style="color:white;">' . $desplegable1["nombreMenu"] . '</a></li>';
-            } elseif ($desplegable1["nombreMenu"] == 'Gestion de menu') {
-                echo '<li style="background-color: #343a40"><a class="dropdown-item" onclick="getVista(\'Menu\',\'obtenerVista\');" href="#" style="color:white;">' . $desplegable1["nombreMenu"] . '</a></li>';
-            } else {
-                echo '<li style="background-color: #343a40"><a class="dropdown-item" href="#" style="color:white;">' . $desplegable1["nombreMenu"] . '</a></li>';
+                echo '<li style="background-color: #343a40"><a class="dropdown-item" onclick="' . $desplegable1["Funcion"] . '" href="#" style="color:white;">' . $desplegable1["nombreMenu"] . '</a></li>';
 
-            }
         }
         echo '</ul>';
         echo '</li>';

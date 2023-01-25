@@ -9,6 +9,7 @@ function getVista(controlador,metodo,otros){
         data: parametros,
         success: function(vista){
             $('#capaContenido').html(vista);
+
         }
      })
 }

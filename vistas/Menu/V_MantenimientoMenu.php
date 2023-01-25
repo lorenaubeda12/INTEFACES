@@ -1,5 +1,6 @@
 <?php
 require_once 'modelos/M_Menu.php';
+require_once 'V_ImprimirDatosMenu.php';
 $menu = array();
 echo '<div class="panel panel-default">
                         <div  class="card-header">
@@ -13,17 +14,21 @@ foreach ($datos as $key => $menuDatos) {
         $menu[$menuDatos['posicionMenu']]['hijos'][] = $menuDatos;
     }
 }
+ $id=0;
 foreach ($menu as $key => $opcion) {
     if (!isset($opcion['hijos'])) {
         echo '<div class="panel-body" style="margin-bottom: 0.2rem; margin-left: 1.7rem">';
-        imprimirDatos($opcion['nombreMenu']);
+        imprimirDatos($opcion['nombreMenu'],$id);
+        $id++;
     } else {
         echo '<div class="panel-body" style="margin-bottom: 0.2rem; margin-left: 1.7rem;margin-top: 2rem">';
-        imprimirDatos($opcion['nombreMenu']);
+        imprimirDatos($opcion['nombreMenu'],$id);
+        $id++;
         foreach ($opcion['hijos'] as $desplegable1) {
             echo '<div class="panel-body" style="margin-bottom: 1rem; margin-left:6rem;margin-top: 1.5rem">';
-           imprimirDatos($desplegable1['nombreMenu']);
-
+           imprimirDatos($desplegable1['nombreMenu'],$id);
+            echo '</div>';
+            $id++;
 
         }
     }
@@ -33,12 +38,3 @@ foreach ($menu as $key => $opcion) {
 
 </div>
 
-<?php
-function imprimirDatos($datos){
-   echo ' <h4>'.$datos . '</h4>
-                              <button type="button" class="btn btn-secondary">Secondary</button>
-                              <button type="button" class="btn btn-secondary">Secondary</button>
-                           <button type="button" class="btn btn-secondary">Secondary</button>
-                           </div>';
-}
-?>

@@ -4,6 +4,7 @@ require_once 'controladores/Controlador.php';
 require_once 'vistas/Vista.php';
 require_once 'modelos/M_Menu.php';
 
+
 class C_Menu extends Controlador
 {
     private $modelo;
@@ -16,7 +17,7 @@ class C_Menu extends Controlador
 
     public function obtenerMenu($tipoMenu){
         $prueba = $this->modelo->buscarMenu($tipoMenu);
-        Vista::render('vistas/Usuarios/V_MenuIndex.php', $prueba);
+        Vista::render('vistas/Menu/V_MenuIndex.php', $prueba);
 
 
     }
@@ -24,7 +25,15 @@ class C_Menu extends Controlador
     public function obtenerVista(){
         $prueba = $this->modelo->buscarDatos();
         //echo json_encode($prueba);
-        Vista::render('vistas/Usuarios/V_MantenimientoMenu.php', $prueba);
+        Vista::render('vistas/Menu/V_MantenimientoMenu.php', $prueba);
+
+    }
+
+    public function getVistaEditarMenu(){
+        $prueba = $this->modelo->buscarDatos();
+        //echo json_encode($prueba);
+        Vista::render('vistas/Menu/V_EditarMenu.php', $prueba);
+
     }
 
 }
