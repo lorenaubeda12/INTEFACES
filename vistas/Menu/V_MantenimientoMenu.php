@@ -1,11 +1,9 @@
 <?php
+echo '<a href="#" class="list-group-item list-group-item-action active" style="margin-top: 2rem; margin-bottom: 1rem">Gestion</a>';
 require_once 'modelos/M_Menu.php';
 require_once 'V_ImprimirDatosMenu.php';
 $menu = array();
-echo '<div class="panel panel-default">
-                        <div  class="card-header">
-                            Gestión del menú
-                        </div>';
+
 foreach ($datos as $key => $menuDatos) {
     if ($menuDatos['posicionMenu'] == 0) {
         $menu[$menuDatos['idMenu']] = $menuDatos;
@@ -14,22 +12,13 @@ foreach ($datos as $key => $menuDatos) {
         $menu[$menuDatos['posicionMenu']]['hijos'][] = $menuDatos;
     }
 }
- $id=0;
+echo '<div class="list-group">';
 foreach ($menu as $key => $opcion) {
-    if (!isset($opcion['hijos'])) {
-        echo '<div class="panel-body" style="margin-bottom: 0.2rem; margin-left: 1.7rem">';
-        imprimirDatos($opcion['nombreMenu'],$id);
-        $id++;
-    } else {
-        echo '<div class="panel-body" style="margin-bottom: 0.2rem; margin-left: 1.7rem;margin-top: 2rem">';
-        imprimirDatos($opcion['nombreMenu'],$id);
-        $id++;
+    imprimirDatos($opcion['nombreMenu'], $opcion['idMenu'], "principal");
+    if (isset($opcion['hijos'])) {
         foreach ($opcion['hijos'] as $desplegable1) {
-            echo '<div class="panel-body" style="margin-bottom: 1rem; margin-left:6rem;margin-top: 1.5rem">';
-           imprimirDatos($desplegable1['nombreMenu'],$id);
+            imprimirDatos($desplegable1['nombreMenu'], $desplegable1['idMenu'], "hijos");
             echo '</div>';
-            $id++;
-
         }
     }
 }

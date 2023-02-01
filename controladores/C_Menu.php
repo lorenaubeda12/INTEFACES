@@ -23,16 +23,25 @@ class C_Menu extends Controlador
     }
 
     public function obtenerVista(){
+        Vista::render('vistas/Menu/V_FiltradoMenu.php');
+
+    }
+    public function obtenerVistaEditar(){
         $prueba = $this->modelo->buscarDatos();
         //echo json_encode($prueba);
         Vista::render('vistas/Menu/V_MantenimientoMenu.php', $prueba);
 
     }
 
-    public function getVistaEditarMenu(){
-        $prueba = $this->modelo->buscarDatos();
+    public function getVistaEditarMenu($idMenu){
+        $prueba = $this->modelo->buscarDatosEditar($idMenu);
         //echo json_encode($prueba);
         Vista::render('vistas/Menu/V_EditarMenu.php', $prueba);
+
+    }
+    public function actualizarDatosMenu($datos){
+        $prueba = $this->modelo->actualizarDatosMenu($datos);
+        Vista::render('vistas/Menu/V_ImprimirDatosMenu.php', $prueba);
 
     }
 
