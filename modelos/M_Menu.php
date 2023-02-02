@@ -53,6 +53,7 @@ class M_Menu extends Modelo
     public function actualizarDatosMenu($datosMenu)
     {
         $fMenuId = '';
+        $ffuncion= '';
         $fnombreMenu = '';
         $fposicionMenu = '';
         $facceso = '';
@@ -70,6 +71,9 @@ class M_Menu extends Modelo
         }
         if ($facceso != '') {
             $SQL .= " ,acceso='$facceso'";
+        }
+        if ($ffuncion != '') {
+            $SQL .= " ,Funcion='$ffuncion'";
         }
 
         $SQL .= " WHERE idMenu='$fMenuId';";

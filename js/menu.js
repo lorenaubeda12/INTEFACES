@@ -1,14 +1,29 @@
-function getVistaEditar(idCapa){
+function getVistaEditar(idCapa) {
     console.log("Hola estoy en editarVista");
-    var parametros = '&controlador=Menu&metodo=getVistaEditarMenu&idMenu='+ idCapa;
+    var parametros = '&controlador=Menu&metodo=getVistaEditarMenu&idMenu=' + idCapa;
     console.log(parametros);
     $.ajax({
         url: 'C_Ajax.php',
         type: 'post',
         data: parametros,
         success: function (vista) {
-            $('#capa'+ idCapa).html(vista);
-            $('#resultados'+ idCapa).hide();
+            $('.menu').html('');
+            $('#capa' + idCapa).html(vista);
+
+        }
+    })
+}function getVistaNuevo(idCapa) {
+    console.log("Hola estoy en editarVista");
+    var parametros = '&controlador=Menu&metodo=getVistaNuevoMenu';
+    console.log(parametros);
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: parametros,
+        success: function (vista) {
+            $('.menu').html('');
+            $('#capa' + idCapa).html(vista);
+
         }
     })
 }
@@ -21,8 +36,14 @@ function actualizarMenu(idCapa) {
         type: 'post',
         data: datosActualizados,
         success: function (vista) {
-            $('#capa'+ idCapa).html(vista);
-            $('#resultados'+ idCapa).hide();
+            $('#capa' + idCapa).html(vista);
+
+
         }
     })
 }
+
+function cerrarMenu(idMenu) {
+    $('#capa' + idMenu).html('');
+}
+

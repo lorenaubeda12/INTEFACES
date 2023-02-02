@@ -3,7 +3,6 @@ echo '<a href="#" class="list-group-item list-group-item-action active" style="m
 require_once 'modelos/M_Menu.php';
 require_once 'V_ImprimirDatosMenu.php';
 $menu = array();
-
 foreach ($datos as $key => $menuDatos) {
     if ($menuDatos['posicionMenu'] == 0) {
         $menu[$menuDatos['idMenu']] = $menuDatos;

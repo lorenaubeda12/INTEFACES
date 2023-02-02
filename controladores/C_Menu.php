@@ -15,36 +15,46 @@ class C_Menu extends Controlador
         $this->modelo = new M_Menu();
     }
 
-    public function obtenerMenu($tipoMenu){
+    public function obtenerMenu($tipoMenu)
+    {
         $prueba = $this->modelo->buscarMenu($tipoMenu);
         Vista::render('vistas/Menu/V_MenuIndex.php', $prueba);
 
 
     }
 
-    public function obtenerVista(){
+    public function obtenerVista()
+    {
         Vista::render('vistas/Menu/V_FiltradoMenu.php');
 
     }
-    public function obtenerVistaEditar(){
+
+    public function obtenerVistaEditar()
+    {
         $prueba = $this->modelo->buscarDatos();
         //echo json_encode($prueba);
         Vista::render('vistas/Menu/V_MantenimientoMenu.php', $prueba);
 
     }
 
-    public function getVistaEditarMenu($idMenu){
+    public function getVistaEditarMenu($idMenu)
+    {
         $prueba = $this->modelo->buscarDatosEditar($idMenu);
         //echo json_encode($prueba);
         Vista::render('vistas/Menu/V_EditarMenu.php', $prueba);
 
     }
-    public function actualizarDatosMenu($datos){
+
+    public function actualizarDatosMenu($datos)
+    {
         $prueba = $this->modelo->actualizarDatosMenu($datos);
         Vista::render('vistas/Menu/V_ImprimirDatosMenu.php', $prueba);
 
-    }
+    }  public function getVistaNuevoMenu()
+    {
+        Vista::render('vistas/Menu/V_NuevoMenu.php');
 
+    }
 }
 
 ?>
