@@ -8,7 +8,7 @@ echo ' <div class="card" style="margin-left: 3rem; margin-bottom: 2rem; margin-t
   <div class="card-body">';
 
 echo '<h5 class="card-title">Nuevo</h5> 
-        <form name="formularioModificarDatosMenu" id="formularioModificarDatosMenu" readonly class="form-control-plaintext">
+        <form name="formularioNuevoMenu" id="formularioNuevoMenu" readonly class="form-control-plaintext">
          <div class="row mx-auto">
                 <label for="fMenuId"></label>
                 <input type="hidden" name="fMenuId" id="fMenuId" class="form-control col-5">

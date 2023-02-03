@@ -48,9 +48,11 @@ class C_Menu extends Controlador
     public function actualizarDatosMenu($datos)
     {
         $prueba = $this->modelo->actualizarDatosMenu($datos);
-        Vista::render('vistas/Menu/V_ImprimirDatosMenu.php', $prueba);
+        Vista::render('vistas/Menu/V_ImprimirDatosMenu.php');
 
-    }  public function getVistaNuevoMenu()
+    }
+
+    public function getVistaNuevoMenu()
     {
         Vista::render('vistas/Menu/V_NuevoMenu.php');
 
