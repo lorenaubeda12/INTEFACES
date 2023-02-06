@@ -1,0 +1,48 @@
+CREATE TABLE PERMISOS(
+id_permiso INT(11) AUTO_INCREMENT,
+id_opcion INT(11),
+num_Permiso INT(2) NOT NULL,
+permiso VARCHAR(100) NOT NULL,
+
+CONSTRAINT PK_Permisos PRIMARY KEY(id_permiso),
+CONSTRAINT FK_Permisos_Menus FOREIGN KEY (id_opcion) REFERENCES MENU(idMenu)
+);
+
+
+CREATE TABLE ROLES(
+id_Rol int(11) AUTO_INCREMENT,,
+rol Varchar(100),
+CONSTRAINT PK_ROLES PRIMARY KEY(id_Rol)
+);
+
+
+CREATE TABLE PERMISOS_ROL(
+id_Permiso int(11) AUTO_INCREMENT,,
+id_Rol int(11) AUTO_INCREMENT, ,
+CONSTRAINT FK_PermisosRol_Permisos FOREIGN KEY (id_Permiso) REFERENCES PERMISOS(id_permiso),
+CONSTRAINT FK_PermisosRol_Roles FOREIGN KEY (id_Rol) REFERENCES ROLES(id_Rol)
+);
+
+alter table permisos_rol add primary key(id_Permiso,id_Rol);
+
+CREATE TABLE PERMISOS_USUARIO(
+id_Permiso int(11),
+id_Usuario int(11),
+
+CONSTRAINT PK_PermisosUsuario PRIMARY KEY(id_permiso,id_Usuario),
+CONSTRAINT FK_Permisos_Usuarios FOREIGN KEY (id_Permiso) REFERENCES PERMISOS(id_permiso)
+);
+
+alter table permisos_usuario  add primary key(id_Permiso,id_Usuario);
+alter table permisos_usuario add foreign key( id_Permiso) REFERENCES permisos(id_Permiso);
+alter table permisos_usuario add foreign key  (id_Usuario) REFERENCES usuario(id_Usuario);
+
+
+
+CREATE TABLE ROLES_USUARIO(
+id_Rol int(11),
+id_Usuario int(11),
+CONSTRAINT PK_RolesUsuario PRIMARY KEY(id_Rol,id_Usuario),
+CONSTRAINT FK_Rol_Usuarios_Rol FOREIGN KEY (id_Rol) REFERENCES PERMISOS(id_Rol),
+CONSTRAINT FK_Rol_Usuarios_Usuario FOREIGN KEY (id_Usuario) REFERENCES usuario(id_Usuario)
+);
