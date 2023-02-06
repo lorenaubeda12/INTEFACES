@@ -52,9 +52,11 @@ class C_Menu extends Controlador
 
     }
 
-    public function getVistaNuevoMenu()
+    public function getVistaNuevoMenu($idMenu)
     {
-        Vista::render('vistas/Menu/V_NuevoMenu.php');
+        $id = $idMenu;
+        Vista::render('vistas/Menu/V_NuevoMenu.php', $id);
+        echo $id;
 
     }
 }

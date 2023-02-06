@@ -21,7 +21,7 @@ foreach ($datos as $key => $datosMenu) {
                 </div>
                 <div class="col-lg-2">
                     <label for="fposicionMenu">Posición del menú</label>
-                    <input type="text" name="fposicionMenu" id="fposicionMenu" class="form-control col-6"
+                    <input type="text" name="fposicionMenu" id="fposicionMenu" class="form-control col-4"
                             value=' . $datosMenu['posicionMenu'] . '>
                             </div> 
                             <div class="col-lg-3">
@@ -29,9 +29,14 @@ foreach ($datos as $key => $datosMenu) {
                     <input type="text" name="ffuncion" id="ffuncion" class="form-control col-20"
                             value=' . $datosMenu['Funcion'] . '>
                             </div> 
-                            <div class="col-lg-4">
+                                  <div class="col-lg-2">
+                    <label for="forder">Orden del menú</label>
+                    <input type="text" name="forder" id="forder" class="form-control col-4"
+                            value=' . $datosMenu['orden'] . '>
+                            </div> 
+                            <div class="col-lg-2">
                     <label for="facceso">Tipo de acceso</label>
-                    <select id="facceso" name="facceso" class="form-control col-6">
+                    <select id="facceso" name="facceso" class="form-control col-8">
                             value=' . $datosMenu['acceso'] . '>';
     if ($datosMenu['acceso'] == 'P') {
         echo '

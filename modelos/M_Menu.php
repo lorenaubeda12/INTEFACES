@@ -22,11 +22,11 @@ class M_Menu extends Modelo
         $menuEncontrado = '';
         // echo @$tipoMenu;
         if ($tipoMenu == 'P') {
-            $SQL = "SELECT * FROM menu WHERE  acceso='" . $tipoMenu . "';";
+            $SQL = "SELECT * FROM menu WHERE  acceso='" . $tipoMenu . "'GROUP BY orden ORDER BY orden;";
             $menuEncontrado = $this->DAO->consultar($SQL);
         } else if ($tipoMenu == 'NP') {
             //echo $tipoMenu;
-            $SQL1 = "SELECT * FROM menu WHERE 1=1 ;";
+            $SQL1 = "SELECT * from menu WHERE 1=1 GROUP BY orden ORDER BY orden;";
             $menuEncontrado = $this->DAO->consultar($SQL1);
         }
         return $menuEncontrado;
@@ -57,6 +57,7 @@ class M_Menu extends Modelo
         $fnombreMenu = '';
         $fposicionMenu = '';
         $facceso = '';
+        $forder = '';
         extract($datosMenu);
 
         $datos = array();
@@ -74,6 +75,9 @@ class M_Menu extends Modelo
         }
         if ($ffuncion != '') {
             $SQL .= " ,Funcion='$ffuncion'";
+        }
+        if ($forder != '') {
+            $SQL .= " ,orden='$forder'";
         }
 
         $SQL .= " WHERE idMenu='$fMenuId';";
@@ -101,10 +105,11 @@ class M_Menu extends Modelo
         $fnombreMenu = '';
         $fposicionMenu = '';
         $facceso = '';
+        $forder = '';
         extract($datosNuevo);
 
         $datos = array();
-        $SQL = "INSERT INTO menu (nombreMenu,posicionMenu,acceso,Funcion) VALUES ('$fnombreMenu','$fposicionMenu','$facceso','$ffuncion');";
+        $SQL = "INSERT INTO menu (nombreMenu,posicionMenu,acceso,Funcion,orden) VALUES ('$fnombreMenu','$fposicionMenu','$facceso','$ffuncion,$forder');";
         //echo "Esta es la SQL " . $SQL;
         $this->DAO->actualizar($SQL);
         return $datos;
