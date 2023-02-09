@@ -53,12 +53,18 @@ class C_Menu extends Controlador
     }
 
     public function getVistaNuevoMenu($idMenu)
-    {
-        $id = $idMenu;
-        Vista::render('vistas/Menu/V_NuevoMenu.php', $id);
-        echo $id;
+    {;
+        Vista::render('vistas/Menu/V_NuevoMenu.php', $idMenu);
 
     }
+
+    public function aniadirMenu($datos)
+    {
+        $prueba = $this->modelo->aniadirMenu($datos);
+        Vista::render('vistas/Menu/V_ImprimirDatosMenu.php');
+
+    }
+
 }
 
 ?>

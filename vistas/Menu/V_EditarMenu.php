@@ -34,6 +34,7 @@ foreach ($datos as $key => $datosMenu) {
                     <input type="text" name="forder" id="forder" class="form-control col-4"
                             value=' . $datosMenu['orden'] . '>
                             </div> 
+ 
                             <div class="col-lg-2">
                     <label for="facceso">Tipo de acceso</label>
                     <select id="facceso" name="facceso" class="form-control col-8">

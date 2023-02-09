@@ -16,7 +16,7 @@ function getVistaEditar(idCapa) {
 
 function getVistaNuevo(idCapa) {
     console.log("Hola estoy en editarVista");
-    var parametros = '&controlador=Menu&metodo=getVistaNuevoMenu';
+    var parametros = '&controlador=Menu&metodo=getVistaNuevoMenu&idMenu=' + idCapa;
     console.log(parametros);
     $.ajax({
         url: 'C_Ajax.php',
@@ -51,6 +51,7 @@ function cerrarMenu(idMenu) {
 function guardarMenu() {
     var parametros = '&controlador=Menu&metodo=aniadirMenu';
     parametros += '&' + $('#formularioNuevoMenu').serialize();
+    console.log(parametros);
     $.ajax({
         url: 'C_Ajax.php',
         type: 'post',

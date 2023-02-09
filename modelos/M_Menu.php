@@ -104,16 +104,29 @@ class M_Menu extends Modelo
         $ffuncion = '';
         $fnombreMenu = '';
         $fposicionMenu = '';
-        $facceso = '';
+        $faccess = '';
         $forder = '';
         extract($datosNuevo);
 
         $datos = array();
-        $SQL = "INSERT INTO menu (nombreMenu,posicionMenu,acceso,Funcion,orden) VALUES ('$fnombreMenu','$fposicionMenu','$facceso','$ffuncion,$forder');";
+        $SQL = "INSERT INTO menu (nombreMenu,posicionMenu,acceso,Funcion,orden) VALUES ('$fnombreMenu','$fposicionMenu','$faccess','$ffuncion,$forder');";
         //echo "Esta es la SQL " . $SQL;
-        $this->DAO->actualizar($SQL);
-        return $datos;
+        $this->DAO->insertar($SQL);
+        $SQL= "UPDATE menu SET orden+1 WHERE orden>=$forder";
+        echo '<br>';
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert" >
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+             <h4 class="alert-heading">¡Datos actulizados!</h4>
+             <hr>
+            <p>Se ha creado una nueva entrada.
+            <!--<button class="refrescar">Refrescar</button>--></p>
+            </div>';
+
     }
+
+
 }
 
 ?>
