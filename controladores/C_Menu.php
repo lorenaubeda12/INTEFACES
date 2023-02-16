@@ -39,6 +39,7 @@ class C_Menu extends Controlador
 
     public function getVistaEditarMenu($idMenu)
     {
+        //echo "Estoy en getVistaEditarMenu";
         $prueba = $this->modelo->buscarDatosEditar($idMenu);
         //echo json_encode($prueba);
         Vista::render('vistas/Menu/V_EditarMenu.php', $prueba);
@@ -58,13 +59,13 @@ class C_Menu extends Controlador
 
     }
 
-    public function aniadirMenu($datos)
+    public function aniadirNuevoMenu($datosNuevos)
     {
-        $prueba = $this->modelo->aniadirMenu($datos);
+        echo "Estoy en aniadirMenuNuevo";
+       $this->modelo->aniadirMenu($datosNuevos);
         Vista::render('vistas/Menu/V_ImprimirDatosMenu.php');
 
     }
-
 }
 
 ?>

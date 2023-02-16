@@ -1,7 +1,6 @@
 <script src="js/menu.js"></script>
 <?php
-
-
+extract($datos);
 echo ' <div class="card" style="margin-left: 3rem; margin-bottom: 2rem; margin-top: 1rem"+>
   <div class="card-header">
     Editar
@@ -13,22 +12,18 @@ echo '<h5 class="card-title">Nuevo</h5>
          <div class="row mx-auto">
                 <label for="fMenuId"></label>
                 <input type="hidden" name="fMenuId" id="fMenuId" class="form-control col-5">
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <label for="fnombreMenu" id="labelForm">Nombre</label>
                     <input type="text" name="fnombreMenu" id="fnombreMenu" class="form-control col-6" style="margin-right: 0rem">
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <label for="fposicionMenu">Posición del menú</label>
-                    <input type="text" name="fposicionMenu" id="fposicionMenu" class="form-control col-4">
+                    <input type="text" name="forder" id="fposicionMenu" class="form-control col-4">
                             </div> 
                             <div class="col-lg-2">
                     <label for="forder">Orden del menu</label>
                     <input type="text" name="forder" id="forder" class="form-control col-4">
                         </div>  
-                     <div class="col-lg-2">
-                    <label for="forder">Acceso</label>
-                    <input type="text" name="faccess" id="faccess" class="form-control col-4">
-                        </div>
                             <div class="col-lg-2">
                     <label for="ffuncion">Funcion</label>
                     <input type="text" name="ffuncion" id="ffuncion" class="form-control col-20">

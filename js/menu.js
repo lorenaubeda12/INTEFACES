@@ -49,7 +49,7 @@ function cerrarMenu(idMenu) {
 }
 
 function guardarMenu() {
-    var parametros = '&controlador=Menu&metodo=aniadirMenu';
+    var parametros = '&controlador=Menu&metodo=aniadirNuevoMenu';
     parametros += '&' + $('#formularioNuevoMenu').serialize();
     console.log(parametros);
     $.ajax({

@@ -89,7 +89,7 @@ class M_Menu extends Modelo
              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
-             <h4 class="alert-heading">¡Datos actulizados!</h4>
+             <h4 class="alert-heading">¡Datos actualizados!</h4>
              <hr>
             <p>Los datos referentes a  ' . $fnombreMenu . ', han sido actualizados correctamente.
             <!--<button class="refrescar">Refrescar</button>--></p>
@@ -107,20 +107,25 @@ class M_Menu extends Modelo
         $faccess = '';
         $forder = '';
         extract($datosNuevo);
+        $SQL = "INSERT INTO menu (nombreMenu,posicionMenu,acceso,Funcion,orden) VALUES ('$fnombreMenu','$fposicionMenu','$faccess','$ffuncion','$forder');";
+        $idMenus= $this->DAO->insertar($SQL);
+        //$SQL= "UPDATE menu SET orden=(orden+1) WHERE orden>$forder;";
+       // $this->DAO->actualizar($SQL);
 
-        $datos = array();
-        $SQL = "INSERT INTO menu (nombreMenu,posicionMenu,acceso,Funcion,orden) VALUES ('$fnombreMenu','$fposicionMenu','$faccess','$ffuncion,$forder');";
-        //echo "Esta es la SQL " . $SQL;
-        $this->DAO->insertar($SQL);
-        $SQL= "UPDATE menu SET orden+1 WHERE orden>=$forder";
+        $SQL1= "INSERT INTO permisos (id_permiso,id_opcion,num_Permiso,permiso) VALUES ('',$idMenus,(),1,'Editar')
+                                                                     ,('',$idMenus,2,'Consultar')
+                                                                     ,('',$idMenus,3,'Crear')
+                                                                     ,('',$idMenus,4,'Modificar')
+                                                                    ,('',$idMenus,5,'Cambiar Estado');";
+        $this->DAO->insertar($SQL1);
         echo '<br>';
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert" >
              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
-             <h4 class="alert-heading">¡Datos actulizados!</h4>
+             <h4 class="alert-heading">¡Datos actualizados!</h4>
              <hr>
-            <p>Se ha creado una nueva entrada.
+            <p>Los datos referentes a  ' . $fnombreMenu . ', han sido actualizados correctamente.
             <!--<button class="refrescar">Refrescar</button>--></p>
             </div>';
 

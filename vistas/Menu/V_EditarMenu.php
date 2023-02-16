@@ -11,10 +11,12 @@ foreach ($datos as $key => $datosMenu) {
     echo '<h5 class="card-title">' . $datosMenu["nombreMenu"] . '</h5> 
         <form name="formularioModificarDatosMenu" id="formularioModificarDatosMenu" readonly class="form-control-plaintext">
          <div class="row mx-auto">
-                <label for="fMenuId"></label>
-                <input type="hidden" name="fMenuId" id="fMenuId" class="form-control col-5"
+         <div class="col-lg-1">
+                <label for="fMenuId">ID</label>
+                <input name="fMenuId" id="fMenuId" class="form-control col-5" readonly
                        value=' . $datosMenu['idMenu'] . '>
-                <div class="col-lg-3">
+                       </div>
+                <div class="col-lg-2">
                     <label for="fnombreMenu" id="labelForm">Nombre</label>
                     <input type="text" name="fnombreMenu" id="fnombreMenu" class="form-control col-6""
                            value=' . $datosMenu['nombreMenu'] . '>

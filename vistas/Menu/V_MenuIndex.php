@@ -22,10 +22,8 @@ foreach ($menu as $key => $opcion) {
         echo '  <a class="nav-link " href="index.php" style=" list-style-type:none; color:white;">' . $opcion['nombreMenu'] . ' <span class="sr-only">(current)</span></a>';
         echo '</li>';
     } else {
-
         echo ' <li class="nav-item dropdown" style=" list-style-type:none; color:white;">';
-        echo ' <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">';
+        echo ' <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">';
         echo $opcion['nombreMenu'];
         echo '</a>';
         echo '<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"  style="background-color: #343a40"; color:white;">';
