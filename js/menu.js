@@ -30,6 +30,23 @@ function getVistaNuevo(idCapa) {
     })
 }
 
+function getVistaPermisos(idCapa) {
+    console.log(idCapa);
+    console.log("Hola estoy en Permisos");
+    var parametros = '&controlador=Menu&metodo=getVistaPermisos&idMenu=' + idCapa;
+    console.log(parametros);
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: parametros,
+        success: function (vista) {
+            $('.menu').html('');
+            $('#capa' + idCapa).html(vista);
+
+        }
+    })
+}
+
 function actualizarMenu(idCapa) {
     var datosActualizados = '&controlador=Menu&metodo=actualizarDatosMenu';
     datosActualizados += '&' + $('#formularioModificarDatosMenu').serialize();
@@ -62,4 +79,7 @@ function guardarMenu() {
         }
     })
 }
+
+
+
 

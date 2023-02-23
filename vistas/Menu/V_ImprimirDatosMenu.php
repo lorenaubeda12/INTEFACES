@@ -9,6 +9,8 @@ function imprimirDatos($datos, $id, $tipo)
         echo '<p href="#" class="list-group-item list-group-item-action list-group-item-primary">' . $datos;
         echo '<button  type="button" style="margin-left: 2rem"  class="btn btn-secondary" data-toggle="collapse" href="#multiCollapseExample1"  role="button" aria-expanded="false" onclick="getVistaEditar(' . $id . ') ;">EDITAR</button>
         <button  type="button" style="margin-left: 1rem"  class="btn btn-secondary" data-toggle="collapse" href="#multiCollapseExample1"  role="button" aria-expanded="false"  onclick="getVistaNuevo(' . $id . ')">NUEVO</button>
+        <button  type="button" style="margin-left: 1rem"  class="btn btn-secondary" data-toggle="collapse" href="#multiCollapseExample1"  role="button" aria-expanded="false" onclick="getVistaPermisos(' . $id . ')">Permisos</button>
+
         </p>';
     }
     if ($tipo == "hijos") {
@@ -16,6 +18,8 @@ function imprimirDatos($datos, $id, $tipo)
         echo '    <p class="list-group-item list-group-item-action list-group-item-info hijos">' . $datos;
         echo '<button  type="button" style="margin-left: 2rem"  class="btn btn-secondary" data-toggle="collapse" href="#multiCollapseExample1"  role="button" aria-expanded="false" onclick="getVistaEditar(' . $id . ') ;">EDITAR</button>
             <button  type="button" style="margin-left: 1rem"  class="btn btn-secondary" data-toggle="collapse" href="#multiCollapseExample1"  role="button" aria-expanded="false" onclick="getVistaNuevo(' . $id . ')">NUEVO</button>
+            <button  type="button" style="margin-left: 1rem"  class="btn btn-secondary" data-toggle="collapse" href="#multiCollapseExample1"  role="button" aria-expanded="false" onclick="getVistaPermisos(' . $id . ')">Permisos</button>
+
             </p>';
     }
     echo '</div>';

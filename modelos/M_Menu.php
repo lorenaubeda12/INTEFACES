@@ -49,6 +49,14 @@ class M_Menu extends Modelo
         $menuEncontrado = $this->DAO->consultar($SQL);
         return $menuEncontrado;
     }
+    public function buscarDatosPermisos($idMenu)
+    {
+        // echo $idMenu['idMenu'];
+        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idMenu["idMenu"] . "';";
+        // echo $SQL;
+        $menuEncontrado = $this->DAO->consultar($SQL);
+        return $menuEncontrado;
+    }
 
     public function actualizarDatosMenu($datosMenu)
     {
@@ -112,7 +120,7 @@ class M_Menu extends Modelo
         //$SQL= "UPDATE menu SET orden=(orden+1) WHERE orden>$forder;";
        // $this->DAO->actualizar($SQL);
 
-        $SQL1= "INSERT INTO permisos (id_permiso,id_opcion,num_Permiso,permiso) VALUES ('',$idMenus,(),1,'Editar')
+        $SQL1= "INSERT INTO permisos (id_permiso,id_opcion,num_Permiso,permiso) VALUES ('',$idMenus,1,'Editar')
                                                                      ,('',$idMenus,2,'Consultar')
                                                                      ,('',$idMenus,3,'Crear')
                                                                      ,('',$idMenus,4,'Modificar')
