@@ -79,6 +79,33 @@ function guardarMenu() {
         }
     })
 }
+function cambiarPermiso(idPermiso,idMenu) {
+    var parametros = '&controlador=Menu&metodo=cambiarPermiso';
+    console.log(parametros);
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: parametros,
+        success: function (vista) {
+            $('#capaResultadosBusqueda').html(vista);
+            $('#capaEdicion').hide();
+        }
+    })
+}
+function vistaEditarPermiso(id) {
+    var parametros = '&controlador=Menu&metodo=verCapaEditarPermiso&idPermiso=' + id;
+    console.log(parametros);
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: parametros,
+        success: function (vista) {
+            $('#capaResultadosBusqueda').html(vista);
+            $('#capaEdicion').hide();
+        }
+    })
+}
+
 
 
 
