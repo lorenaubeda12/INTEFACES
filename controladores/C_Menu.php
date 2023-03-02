@@ -61,6 +61,12 @@ class C_Menu extends Controlador
         Vista::render('vistas/Menu/V_ImprimirDatosMenu.php');
 
     }
+    public function modificarPermiso($datos)
+    {
+        $prueba = $this->modelo->modificarPermisos($datos);
+        Vista::render('vistas/sucess.php');
+
+    }
 
     public function getVistaNuevoMenu($idMenu)
     {

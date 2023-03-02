@@ -49,12 +49,13 @@ class M_Menu extends Modelo
         $menuEncontrado = $this->DAO->consultar($SQL);
         return $menuEncontrado;
     }
+
     public function buscarDatosPermisos($idOpcion)
     {
 //        echo json_encode($idOpcion);
 //        echo $idOpcion['idMenu'];
         // echo $idMenu['idMenu'];
-        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion['idMenu']. "';";
+        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion['idMenu'] . "';";
         //echo $SQL;
         $menuEncontrado = $this->DAO->consultar($SQL);
         return $menuEncontrado;
@@ -107,6 +108,36 @@ class M_Menu extends Modelo
         //return $datos;
     }
 
+    public function modificarPermisos($datosPermisos)
+    {
+        $fPermisoID = '';
+        $fnombrePermiso = '';
+        $fidPermisoOpcion = '';
+        $fnumPermiso = '';
+
+
+        extract($datosPermisos);
+
+        $datos = array();
+        $SQL = "UPDATE permisos SET ";
+        //echo $loginUser;
+        if ($fnombrePermiso != '') {
+            $SQL .= "permiso='$fnombrePermiso'";
+        }
+        if ($fidPermisoOpcion != '') {
+            $SQL .= " ,id_opcion='$fidPermisoOpcion'";
+        }
+        if ($fnumPermiso != '') {
+            $SQL .= " ,num_permiso='$fnumPermiso'";
+        }
+
+        $SQL .= " WHERE id_permiso='$fPermisoID';";
+//echo "Esta es la SQL " . $SQL;
+        $this->DAO->actualizar($SQL);
+        $ActualizarDespuesDe = 5;
+        //return $datos;
+    }
+
 
     public function aniadirMenu($datosNuevo)
     {
@@ -118,11 +149,11 @@ class M_Menu extends Modelo
         $forder = '';
         extract($datosNuevo);
         $SQL = "INSERT INTO menu (nombreMenu,posicionMenu,acceso,Funcion,orden) VALUES ('$fnombreMenu','$fposicionMenu','$faccess','$ffuncion','$forder');";
-        $idMenus= $this->DAO->insertar($SQL);
+        $idMenus = $this->DAO->insertar($SQL);
         //$SQL= "UPDATE menu SET orden=(orden+1) WHERE orden>$forder;";
-       // $this->DAO->actualizar($SQL);
+        // $this->DAO->actualizar($SQL);
 
-        $SQL1= "INSERT INTO permisos (id_permiso,id_opcion,num_Permiso,permiso) VALUES ('',$idMenus,1,'Editar')
+        $SQL1 = "INSERT INTO permisos (id_permiso,id_opcion,num_Permiso,permiso) VALUES ('',$idMenus,1,'Editar')
                                                                      ,('',$idMenus,2,'Consultar')
                                                                      ,('',$idMenus,3,'Crear')
                                                                      ,('',$idMenus,4,'Modificar')
@@ -140,6 +171,7 @@ class M_Menu extends Modelo
             </div>';
 
     }
+
     public function buscarPermisos($datos)
     {
         $idOpcion = '';
@@ -152,7 +184,7 @@ class M_Menu extends Modelo
         $permisos = array();
 //        $permisos['id_opcion'] = $idOpcion;
 //        $permisos['nombre_opcion'] = $nombreOpcion;
-        return  $permisosEncontrados ;
+        return $permisosEncontrados;
     }
 }
 

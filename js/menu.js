@@ -60,6 +60,20 @@ function actualizarMenu(idCapa) {
         }
     })
 }
+function modificarPermiso(idPermiso,idOpcion) {
+    var datosActualizados = '&controlador=Menu&metodo=modificarPermiso';
+    datosActualizados += '&' + $('#formularioModificarDatosPermisosMenu').serialize();
+    console.log(datosActualizados);
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: datosActualizados,
+        success: function (vista) {
+            $('#editarPermiso' + idPermiso).html(vista);
+
+        }
+    })
+}
 
 function cerrarMenu(idMenu) {
     $('#capa' + idMenu).html('');
@@ -95,7 +109,7 @@ function cambiarPermiso(idPermiso,idMenu) {
         }
     })
 }
-function vistaEditarPermiso(id, idPermiso) {
+function vistaEditarPermisos(id, idPermiso) {
     // alert("Estoy en edita Permiso")
     let parametros = '&controlador=Menu&metodo=verCapaEditarPermisos&idOpcion='+ id;
     parametros+='&idPermiso='+idPermiso;
@@ -105,7 +119,23 @@ function vistaEditarPermiso(id, idPermiso) {
         type: 'post',
         data: parametros,
         success: function (vista) {
-            $('#editarPermiso'+id).html(vista);
+            $('#editarPermiso'+idPermiso).html(vista);
+        }
+    })
+}
+
+//Terminar de hacer el metodo de borrar permisos
+function borrarPermisos(id, idPermiso) {
+    alert("Estoy en borrar Permiso")
+    let parametros = '&controlador=Menu&metodo=verCapaEditarPermisos&idOpcion='+ id;
+    parametros+='&idPermiso='+idPermiso;
+    console.log(parametros);
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: parametros,
+        success: function (vista) {
+            $('#editarPermiso'+idPermiso).html(vista);
         }
     })
 }
