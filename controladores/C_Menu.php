@@ -78,16 +78,12 @@ class C_Menu extends Controlador
     }
 
 
-    public function cambiarPermiso($idMenu)
+    public function verCapaEditarPermisos($datos)
     {
 
-    }
-
-    public function verCapaEditarPermiso($idMenu)
-    {
-        $prueba = $this->modelo->buscarDatosPermisos($idMenu);
-        //echo json_encode($prueba);
-        Vista::render('vistas/Menu/V_CapaEditarPermiso.php', $prueba);
+        echo "Estoy en aniadirMenuNuevo";
+        $datosPermiso=$this->modelo->buscarPermisos($datos);
+        Vista::render('vistas/Menu/V_EditarPermiso.php', $datosPermiso);
 
     }
 }

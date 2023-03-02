@@ -15,26 +15,25 @@ echo '<h5 class="card-title">Permisos </h5>
 foreach ($datos as $key => $datosMenu) {
     if ($datosMenu["num_Permiso"] <> null) {
         echo '<div>';
-        echo '<label><input disabled="disabled" type="checkbox" id="cbox1" value=' . $datosMenu["num_Permiso"] . ' checked>' . $datosMenu["permiso"] . '
-<img src="imagenes/edicion.png" style="width: 3rem; margin-left: 3rem; background: transparent" onclick="vistaEditarPermiso("'.$datosMenu["id_opcion"].'")"></td></tr>
-   <img src="imagenes/borrar.png" style="width: 3rem; margin-left: 3rem; background: transparent"  onclick="eliminarPermiso(' . $datosMenu["num_Permiso"] . ',' . $datosMenu["id_opcion"] . ')"></td></tr></label>';
-    echo '<div id="editarPermiso' . $datosMenu["id_opcion"] . '"></div>';
+        echo '<p>' . $datosMenu["permiso"] . '
+<img src="imagenes/edicion.png" style="width: 3rem; margin-left: 3rem; background: transparent" onclick="vistaEditarPermiso('.$datosMenu["id_opcion"].','.$datosMenu["id_permiso"].')">';
+    echo '<div id="editarPermiso' . $datosMenu["id_opcion"] . '"></div></p>';
 
     } else {
 
         echo '<div>';
         echo '<label><input disabled="disabled" type="checkbox" id="cbox1" value=' . $datosMenu["num_Permiso"] . ' checked>' . $datosMenu["permiso"] . '</label></div>
-<img src="imagenes/edicion.png" style="width: 3rem; margin-left: 3rem; background: transparent"  onclick=""></td></tr>
-       <img src="imagenes/borrar.png" style="width: 3rem; margin-left: 3rem; background: transparent"  onclick=""></td></tr><br>';
+<img src="imagenes/edicion.png" style="width: 3rem; margin-left: 3rem; background: transparent"  onclick="">
+       <img src="imagenes/borrar.png" style="width: 3rem; margin-left: 3rem; background: transparent"  onclick=""><br>';
 
 
     }
     echo '</div>';
 }
 
-echo '</div></div>';
-echo '   <button type="button" onclick="actualizarMenu(' . $datosMenu['id_opcion'] . ');" class="btn btn-primary float-lg-right " style=" margin-left:4rem" >Crear Permisos</button>
-<button type="button" class="btn btn-primary float-lg-right refrescar " style="margin-left:4rem" onclick="cerrarMenu(' . $datosMenu['id_opcion'] . ')">Cerrar</button>';
-echo ' </div>';
+//echo '</div></div>';
+//echo '   <button type="button" onclick="actualizarMenu(' . $datosMenu['id_opcion'] . ');" class="btn btn-primary float-lg-right " style=" margin-left:4rem" >Crear Permisos</button>
+//<button type="button" class="btn btn-primary float-lg-right refrescar " style="margin-left:4rem" onclick="cerrarMenu(' . $datosMenu['id_opcion'] . ')">Cerrar</button>';
+//echo ' </div>';
 
 

@@ -49,11 +49,13 @@ class M_Menu extends Modelo
         $menuEncontrado = $this->DAO->consultar($SQL);
         return $menuEncontrado;
     }
-    public function buscarDatosPermisos($idMenu)
+    public function buscarDatosPermisos($idOpcion)
     {
+//        echo json_encode($idOpcion);
+//        echo $idOpcion['idMenu'];
         // echo $idMenu['idMenu'];
-        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idMenu["idMenu"] . "';";
-        // echo $SQL;
+        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion['idMenu']. "';";
+        //echo $SQL;
         $menuEncontrado = $this->DAO->consultar($SQL);
         return $menuEncontrado;
     }
@@ -138,8 +140,20 @@ class M_Menu extends Modelo
             </div>';
 
     }
-
-
+    public function buscarPermisos($datos)
+    {
+        $idOpcion = '';
+        $idPermiso = '';
+        extract($datos);
+        json_encode($idOpcion);
+        json_encode($idPermiso);
+        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion . "'AND id_permiso='" . $idPermiso . "';";
+        $permisosEncontrados = $this->DAO->consultar($SQL);
+        $permisos = array();
+//        $permisos['id_opcion'] = $idOpcion;
+//        $permisos['nombre_opcion'] = $nombreOpcion;
+        return  $permisosEncontrados ;
+    }
 }
 
 ?>

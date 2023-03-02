@@ -64,6 +64,9 @@ function actualizarMenu(idCapa) {
 function cerrarMenu(idMenu) {
     $('#capa' + idMenu).html('');
 }
+function cerrarPermiso(idPermiso) {
+    $('#editarPermiso' + idPermiso).html('');
+}
 
 function guardarMenu() {
     var parametros = '&controlador=Menu&metodo=aniadirNuevoMenu';
@@ -92,20 +95,20 @@ function cambiarPermiso(idPermiso,idMenu) {
         }
     })
 }
-function vistaEditarPermiso(id) {
-    var parametros = '&controlador=Menu&metodo=verCapaEditarPermiso&idPermiso=' + id;
+function vistaEditarPermiso(id, idPermiso) {
+    // alert("Estoy en edita Permiso")
+    let parametros = '&controlador=Menu&metodo=verCapaEditarPermisos&idOpcion='+ id;
+    parametros+='&idPermiso='+idPermiso;
     console.log(parametros);
     $.ajax({
         url: 'C_Ajax.php',
         type: 'post',
         data: parametros,
         success: function (vista) {
-            $('#capaResultadosBusqueda').html(vista);
-            $('#capaEdicion').hide();
+            $('#editarPermiso'+id).html(vista);
         }
     })
 }
-
 
 
 
