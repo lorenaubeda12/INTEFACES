@@ -1,6 +1,6 @@
 function getVistaEditar(idCapa) {
     console.log("Hola estoy en editarVista");
-    var parametros = '&controlador=Menu&metodo=getVistaEditarMenu&idMenu=' + idCapa;
+    var parametros = '&controlador=Menu&metodo=buscarDatosEditar&idMenu=' + idCapa;
     console.log(parametros);
     $.ajax({
         url: 'C_Ajax.php',
