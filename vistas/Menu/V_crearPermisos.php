@@ -21,7 +21,7 @@ echo ' <div class="card" style="margin-left: 3rem; margin-bottom: 2rem; margin-t
                             </div> 
                              <div class="col-lg-3">
                     <label for="fnumPermisoNuevo">Numero de permiso</label>
-                    <input type="text" name="fnumPermisoNuevo" id="fnumPermisoNuevo" class="form-control col-4">
+                    <input type="text" name="fnumPermisoNuevo" id="fnumPermisoNuevo" class="form-control col-4" required>
                             </div>
                   
 </div>
@@ -33,13 +33,17 @@ echo ' <div class="card" style="margin-left: 3rem; margin-bottom: 2rem; margin-t
   </button>
   </div>
   
-    <button type="button" onclick="crearPermiso();" class="btn btn-primary float-lg-right " style="margin-top: 2rem">Crear</button>
+   <div id="alertaUsuario'.$idOpcion.'" style="margin-top: 1rem;margin-bottom: 1rem"></div> 
+   <div id="alertaUsuario2'.$idOpcion.'" style="margin-top: 1rem;margin-bottom: 1rem"></div> 
+  
+  
+    <button type="button" onclick="crearPermiso(' . $idOpcion. ')" class="btn btn-primary float-lg-right " style="margin-top: 2rem">Crear</button>
    <button type="button" class="btn btn-primary float-lg-right refrescar " style="margin-top: 2rem; margin-left:4rem; margin-right: 2rem" onclick="atras(' . $idOpcion. ')">Cerrar</button>
    </div>
    </div>
    </div>
     </form>
-    
+  
  
  ';
 

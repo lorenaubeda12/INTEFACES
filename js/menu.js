@@ -180,19 +180,35 @@ function borrarPermisos(id, idPermiso,tipoPermiso) {
         }
     })
 }
-function crearPermiso() {
-    var datosActualizados = '&controlador=Menu&metodo=crearPermisoMenu';
-    datosActualizados += '&' + $('#formularioCrearPermiso').serialize();
-    console.log(parametros);
-    $.ajax({
-        url: 'C_Ajax.php',
-        type: 'post',
-        data: parametros,
-        success: function (vista) {
-            $('#editarPermiso' + idPermiso).html(vista);
+function crearPermiso(idOpcion) {
+    // Verificar si el campo fnumPermisoNuevo está vacío
+    var numPermisoNuevo = $('#fnumPermisoNuevo').val();
+    var nombrePermiso = $('#fnombrePermisoNuevo').val();
+    if (!numPermisoNuevo && !nombrePermiso) {
+        $('#alertaUsuario' + idOpcion).html('<div class="alert alert-danger alert-dismissible fade show" role="alert">\n' +
+            '  <strong>¡Error!</strong> El nombre o el numero de permiso estan vacios. Recuerde <b>no pueden estar vacios</b>.\n' +
+            '  <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+            '    <span aria-hidden="true">&times;</span>\n' +
+            '  </button>\n' +
+            '</div>');
+        return;
+    } else {
+        var datosActualizados = '&controlador=Menu&metodo=crearPermisoMenu';
+        datosActualizados += '&' + $('#formularioCrearPermiso').serialize();
+        console.log(datosActualizados);
+        $.ajax({
+            url: 'C_Ajax.php',
+            type: 'post',
+            data: datosActualizados,
+            success: function (vista) {
+                $('#alertaUsuario' + idOpcion).html(vista);
 
-        }
-    })
+
+            }
+        })
+
+    }
+
 }
 
 

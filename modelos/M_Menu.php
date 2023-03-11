@@ -218,6 +218,27 @@ class M_Menu extends Modelo
 //        $permisos['nombre_opcion'] = $nombreOpcion;
         return $permisosEncontrados;
     }
+
+    public function crearPermiso($datos)
+    {
+        $fnPermiso = '';
+        $fidOpcion = '';
+        $fnumPermisoNuevo = '';
+        extract($datos);;
+       $SQL = "SELECT * FROM permisos WHERE 1=1 AND permiso='" . $fnPermiso . "'AND num_Permiso='" . $fnumPermisoNuevo . "' AND id_opcion='" . $fidOpcion . "';";
+        $permisosEncontrados = $this->DAO->consultar($SQL);
+
+        $SQL2="SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $fidOpcion . "'AND num_Permiso='" . $fnumPermisoNuevo . "';";
+        $permisosEncontrados2 = $this->DAO->consultar($SQL2);
+        if($permisosEncontrados==null && $permisosEncontrados2==null ){
+            $SQL = "INSERT INTO permisos (id_permiso,id_opcion,num_Permiso,permiso) VALUES ('',$fidOpcion,$fnumPermisoNuevo,'$fnPermiso');";
+            $this->DAO->insertar($SQL);
+            return 1;
+        }else{
+            return 0;
+        }
+
+    }
 }
 
 ?>

@@ -110,8 +110,13 @@ class C_Menu extends Controlador
     }
     public function crearPermisoMenu($datos)
     {
-        echo "Estoy en aniadirMenuNuevo";
-        Vista::render('vistas/Menu/V_crearPermisos.php',$datos);
+        echo "Estoy en Crear permiso";
+        $datosPermiso = $this->modelo->crearPermiso($datos);
+        if ($datosPermiso ==1) {
+            Vista::render('vistas/sucess.php');
+        } else {
+            Vista::render('vistas/error.php');
+        }
 
     }
 }
