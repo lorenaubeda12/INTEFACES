@@ -92,5 +92,13 @@ class C_Menu extends Controlador
         Vista::render('vistas/Menu/V_EditarPermiso.php', $datosPermiso);
 
     }
+
+    public function borrarPermiso($datos)
+    {
+        echo "Estoy borrar un permiso";
+        $datosPermiso=$this->modelo->borrarPermisos($datos);
+        Vista::render('vistas/sucess.php');
+
+    }
 }
 ?>

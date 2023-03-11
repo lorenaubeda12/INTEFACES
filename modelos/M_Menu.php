@@ -41,10 +41,12 @@ class M_Menu extends Modelo
     }
 
 
-    public function buscarDatosEditar($idMenu)
+    public function buscarDatosEditar($menu)
     {
+        $idMenu = '';
+        extract($menu);
         // echo $idMenu['idMenu'];
-        $SQL = "SELECT * FROM menu WHERE 1=1 AND idMenu='" . $idMenu["idMenu"] . "';";
+        $SQL = "SELECT * FROM menu WHERE 1=1 AND idMenu='" . $idMenu . "';";
         // echo $SQL;
         $menuEncontrado = $this->DAO->consultar($SQL);
         return $menuEncontrado;
@@ -181,6 +183,23 @@ class M_Menu extends Modelo
         json_encode($idPermiso);
         $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion . "'AND id_permiso='" . $idPermiso . "';";
         $permisosEncontrados = $this->DAO->consultar($SQL);
+        $permisos = array();
+//        $permisos['id_opcion'] = $idOpcion;
+//        $permisos['nombre_opcion'] = $nombreOpcion;
+        return $permisosEncontrados;
+    }
+
+    public function borrarPermisos($datos)
+    {
+        $idOpcion = '';
+        $idPermiso = '';
+        $tipoPermiso = '';
+        extract($datos);
+        json_encode($idOpcion);
+        json_encode($idPermiso);
+        json_encode($tipoPermiso);
+        $SQL = "DELETE FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion . "'AND id_permiso='" . $idPermiso . "' AND permiso='" . $tipoPermiso . "';";
+        $permisosEncontrados = $this->DAO->borrar($SQL);
         $permisos = array();
 //        $permisos['id_opcion'] = $idOpcion;
 //        $permisos['nombre_opcion'] = $nombreOpcion;
