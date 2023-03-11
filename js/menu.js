@@ -149,12 +149,40 @@ function vistaEditarPermisos(id, idPermiso) {
     })
 }
 
+function vistaCrearPermisos(idOpcion,idPermiso) {
+     // alert("Estoy en crear Permiso")
+    let parametros = '&controlador=Menu&metodo=verCapaCrearPermiso&idOpcion=' + idOpcion;
+    console.log(parametros);
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: parametros,
+        success: function (vista) {
+            $('#capa' + idOpcion).html(vista);
+        }
+    })
+}
+
 //Terminar de hacer el metodo de borrar permisos
 function borrarPermisos(id, idPermiso,tipoPermiso) {
-    alert("Estoy en borrar Permiso")
+    //alert("Estoy en borrar Permiso")
     let parametros = '&controlador=Menu&metodo=borrarPermiso&idOpcion=' + id;
     parametros += '&idPermiso=' + idPermiso;
     parametros += '&tipoPermiso=' + tipoPermiso;
+    console.log(parametros);
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: parametros,
+        success: function (vista) {
+            $('#editarPermiso' + idPermiso).html(vista);
+
+        }
+    })
+}
+function crearPermiso() {
+    var datosActualizados = '&controlador=Menu&metodo=crearPermisoMenu';
+    datosActualizados += '&' + $('#formularioCrearPermiso').serialize();
     console.log(parametros);
     $.ajax({
         url: 'C_Ajax.php',

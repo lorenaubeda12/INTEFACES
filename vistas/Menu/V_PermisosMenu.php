@@ -17,14 +17,14 @@ foreach ($datos as $key => $datosMenu) {
         echo '<div>';
         echo '<p>' . $datosMenu["permiso"] . '
 <img src="imagenes/edicion.png" style="width: 3rem; margin-left: 3rem; background: transparent" onclick="vistaEditarPermisos(' . $datosMenu["id_opcion"] . ',' . $datosMenu["id_permiso"] . ')"> 
-<img src="imagenes/borrar.png" style="width: 3rem; margin-left: 3rem; background: transparent"  onclick="borrarPermisos(' . $datosMenu["id_opcion"] . ',' . $datosMenu["id_permiso"]. ',\'' . $datosMenu["permiso"] . '\')"><br></p>';
+<img src="imagenes/borrar.png" style="width: 3rem; margin-left: 3rem; background: transparent"  onclick="borrarPermisos(' . $datosMenu["id_opcion"] . ',' . $datosMenu["id_permiso"] . ',\'' . $datosMenu["permiso"] . '\')"><br></p>';
         echo '<div id="editarPermiso' . $datosMenu["id_permiso"] . '"></div>';
-    } 
+    }
     echo '</div>';
 }
 echo '</div></div>';
-echo '   <button type="button" onclick="actualizarMenu(' . $datosMenu['id_opcion'] . ');" class="btn btn-primary float-lg-right " style=" margin-left:4rem" >Crear Permisos</button>
-<button type="button" class="btn btn-primary float-lg-right refrescar " style="margin-left:4rem" onclick="cerrarMenu(' . $datosMenu['id_opcion'] . ')">Cerrar</button>';
+echo '   <button type="button" onclick="vistaCrearPermisos(' . $datosMenu['id_opcion'].');" class="btn btn-primary float-lg-right " style=" margin-left:4rem" >Crear Permisos</button>
+<button type="button" class="btn btn-secondary float-lg-right refrescar " style="margin-left:4rem" onclick="cerrarMenu(' . $datosMenu['id_opcion'] . ')">Cerrar</button>';
 echo ' </div>';
 
 

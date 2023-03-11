@@ -57,7 +57,7 @@ class M_Menu extends Modelo
 //        echo json_encode($idOpcion);
 //        echo $idOpcion['idMenu'];
         // echo $idMenu['idMenu'];
-        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion['idMenu'] . "';";
+        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion['idMenu'] . "'ORDER BY num_Permiso;;";
         //echo $SQL;
         $menuEncontrado = $this->DAO->consultar($SQL);
         return $menuEncontrado;
@@ -182,6 +182,19 @@ class M_Menu extends Modelo
         json_encode($idOpcion);
         json_encode($idPermiso);
         $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion . "'AND id_permiso='" . $idPermiso . "';";
+        $permisosEncontrados = $this->DAO->consultar($SQL);
+        $permisos = array();
+//        $permisos['id_opcion'] = $idOpcion;
+//        $permisos['nombre_opcion'] = $nombreOpcion;
+        return $permisosEncontrados;
+    }
+    public function buscarPermiso($datos)
+    {
+        $idOpcion = '';
+        extract($datos);
+        json_encode($idOpcion);
+
+        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion . "';";
         $permisosEncontrados = $this->DAO->consultar($SQL);
         $permisos = array();
 //        $permisos['id_opcion'] = $idOpcion;

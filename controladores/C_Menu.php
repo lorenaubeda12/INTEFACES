@@ -61,6 +61,7 @@ class C_Menu extends Controlador
         Vista::render('vistas/Menu/V_ImprimirDatosMenu.php');
 
     }
+
     public function modificarPermiso($datos)
     {
         $prueba = $this->modelo->modificarPermisos($datos);
@@ -88,7 +89,7 @@ class C_Menu extends Controlador
     {
 
         echo "Estoy en aniadirMenuNuevo";
-        $datosPermiso=$this->modelo->buscarPermisos($datos);
+        $datosPermiso = $this->modelo->buscarPermisos($datos);
         Vista::render('vistas/Menu/V_EditarPermiso.php', $datosPermiso);
 
     }
@@ -96,9 +97,23 @@ class C_Menu extends Controlador
     public function borrarPermiso($datos)
     {
         echo "Estoy borrar un permiso";
-        $datosPermiso=$this->modelo->borrarPermisos($datos);
+        $datosPermiso = $this->modelo->borrarPermisos($datos);
         Vista::render('vistas/sucess.php');
 
     }
+
+    public function verCapaCrearPermiso($datos)
+    {
+        echo "Estoy en aniadirMenuNuevo";
+        Vista::render('vistas/Menu/V_crearPermisos.php',$datos);
+
+    }
+    public function crearPermisoMenu($datos)
+    {
+        echo "Estoy en aniadirMenuNuevo";
+        Vista::render('vistas/Menu/V_crearPermisos.php',$datos);
+
+    }
 }
+
 ?>
