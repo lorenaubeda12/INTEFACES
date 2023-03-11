@@ -38,7 +38,7 @@ echo ' <div class="card" style="margin-left: 3rem; margin-bottom: 2rem; margin-t
   
   
     <button type="button" onclick="crearPermiso(' . $idOpcion. ')" class="btn btn-primary float-lg-right " style="margin-top: 2rem">Crear</button>
-   <button type="button" class="btn btn-primary float-lg-right refrescar " style="margin-top: 2rem; margin-left:4rem; margin-right: 2rem" onclick="atras(' . $idOpcion. ')">Cerrar</button>
+   <button type="button" class="btn btn-primary float-lg-right refrescar " style="margin-top: 2rem; margin-left:4rem; margin-right: 2rem" onclick="cerrarMenu(' . $idOpcion. ')">Cerrar</button>
    </div>
    </div>
    </div>

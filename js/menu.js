@@ -175,11 +175,13 @@ function borrarPermisos(id, idPermiso,tipoPermiso) {
         type: 'post',
         data: parametros,
         success: function (vista) {
+            $('#capa' + idPermiso).html(   );
             $('#editarPermiso' + idPermiso).html(vista);
 
         }
     })
 }
+
 function crearPermiso(idOpcion) {
     // Verificar si el campo fnumPermisoNuevo está vacío
     var numPermisoNuevo = $('#fnumPermisoNuevo').val();
