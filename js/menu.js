@@ -175,8 +175,8 @@ function borrarPermisos(id, idPermiso,tipoPermiso) {
         type: 'post',
         data: parametros,
         success: function (vista) {
-            $('#capa' + idPermiso).html(   );
-            $('#editarPermiso' + idPermiso).html(vista);
+            recargarPermisos(id);
+            // $('#editarPermiso' + idPermiso).html(vista);
 
         }
     })
@@ -212,9 +212,36 @@ function crearPermiso(idOpcion) {
     }
 
 }
+function recargarPermisos(id){
+    //alert("Estoy en borrar Permiso")
+    let parametros = '&controlador=Menu&metodo=buscarPermiso&idOpcion=' + id;
+    console.log(parametros);
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: parametros,
+        success: function (vista) {
+            $('#capa' + id).html(vista);
 
+        }
+    })
+}
 
+function refrescar(){
+let parametros = '&controlador=Menu&metodo=refrescar';
+    console.log(parametros);
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: parametros,
+        success: function (vista) {
+            $('#capaResultadosBusqueda').html(vista);
+            $('#capaEdicion').hide();
 
+        }
+    })
+
+}
 
 
 

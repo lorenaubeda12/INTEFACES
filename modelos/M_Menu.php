@@ -188,17 +188,16 @@ class M_Menu extends Modelo
 //        $permisos['nombre_opcion'] = $nombreOpcion;
         return $permisosEncontrados;
     }
+
     public function buscarPermiso($datos)
     {
         $idOpcion = '';
         extract($datos);
         json_encode($idOpcion);
 
-        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion . "';";
+        $SQL = "SELECT * FROM permisos WHERE 1=1 AND id_Opcion ='" . $idOpcion . "'ORDER BY num_Permiso;";
+
         $permisosEncontrados = $this->DAO->consultar($SQL);
-        $permisos = array();
-//        $permisos['id_opcion'] = $idOpcion;
-//        $permisos['nombre_opcion'] = $nombreOpcion;
         return $permisosEncontrados;
     }
 
@@ -213,9 +212,18 @@ class M_Menu extends Modelo
         json_encode($tipoPermiso);
         $SQL = "DELETE FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion . "'AND id_permiso='" . $idPermiso . "' AND permiso='" . $tipoPermiso . "';";
         $permisosEncontrados = $this->DAO->borrar($SQL);
-        $permisos = array();
-//        $permisos['id_opcion'] = $idOpcion;
-//        $permisos['nombre_opcion'] = $nombreOpcion;
+        if($permisosEncontrados <> null){
+            echo '<br>';
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert" >
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+             <h4 class="alert-heading">¡Acción realizada de manera correcta!</h4>
+             <hr>
+            <p>Se ha procedido de manera correcta con la acción realizada.
+            <!--<button class="refrescar">Refrescar</button>--></p>
+            </div>';
+        }
         return $permisosEncontrados;
     }
 
@@ -225,16 +233,16 @@ class M_Menu extends Modelo
         $fidOpcion = '';
         $fnumPermisoNuevo = '';
         extract($datos);;
-       $SQL = "SELECT * FROM permisos WHERE 1=1 AND permiso='" . $fnPermiso . "'AND num_Permiso='" . $fnumPermisoNuevo . "' AND id_opcion='" . $fidOpcion . "';";
+        $SQL = "SELECT * FROM permisos WHERE 1=1 AND permiso='" . $fnPermiso . "'AND num_Permiso='" . $fnumPermisoNuevo . "' AND id_opcion='" . $fidOpcion . "';";
         $permisosEncontrados = $this->DAO->consultar($SQL);
 
-        $SQL2="SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $fidOpcion . "'AND num_Permiso='" . $fnumPermisoNuevo . "';";
+        $SQL2 = "SELECT * FROM permisos WHERE 1=1 AND id_opcion='" . $fidOpcion . "'AND num_Permiso='" . $fnumPermisoNuevo . "';";
         $permisosEncontrados2 = $this->DAO->consultar($SQL2);
-        if($permisosEncontrados==null && $permisosEncontrados2==null ){
+        if ($permisosEncontrados == null && $permisosEncontrados2 == null) {
             $SQL = "INSERT INTO permisos (id_permiso,id_opcion,num_Permiso,permiso) VALUES ('',$fidOpcion,$fnumPermisoNuevo,'$fnPermiso');";
             $this->DAO->insertar($SQL);
             return 1;
-        }else{
+        } else {
             return 0;
         }
 
