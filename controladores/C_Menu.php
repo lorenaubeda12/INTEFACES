@@ -37,6 +37,14 @@ class C_Menu extends Controlador
 
     }
 
+    public function obtenerVistaUsuarios()
+    {
+        $prueba = $this->modelo->buscarDatos();
+        //echo json_encode($prueba);
+        Vista::render('vistas/Menu/V_UsuariosMenu.php', $prueba);
+
+    }
+
     public function getVistaEditarMenu($idMenu)
     {
         //echo "Estoy en getVistaEditarMenu";
@@ -125,6 +133,14 @@ class C_Menu extends Controlador
     {
 
         $datosPermiso = $this->modelo->buscarPermiso($datos);
+        Vista::render('vistas/Menu/V_PermisosMenu.php',$datosPermiso);
+
+    }
+
+    public function buscarRoles($datos)
+    {
+
+        $datosPermiso = $this->modelo->buscarRoles($datos);
         Vista::render('vistas/Menu/V_PermisosMenu.php',$datosPermiso);
 
     }

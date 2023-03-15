@@ -240,7 +240,7 @@ class M_Usuarios extends Modelo
         $accesso = '';
         $usuarios = array();
         $menuEncontrado = '';
-       // echo @$tipoMenu;
+        // echo @$tipoMenu;
         if ($tipoMenu == 'P') {
             $SQL = "SELECT * FROM menu WHERE  acceso='" . $tipoMenu . "';";
             $menuEncontrado = $this->DAO->consultar($SQL);
@@ -251,6 +251,16 @@ class M_Usuarios extends Modelo
         }
         return $menuEncontrado;
     }
+
+    public function comboUsuariosAutoCompleteJQ($datos)
+    {
+        //consultar BD, los usuarios
+        $datos['usuarios'] = $this->modelo->buscarUsuarios(array('ftexto' => $datos['query'],
+
+            //generar la vista de resultados
+            Vista::render('vistas/Usuarios/V_Usuarios_comboAutocomplete.php', $datos)
+        )
+        );}
 }
 
 ?>

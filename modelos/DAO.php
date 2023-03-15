@@ -71,6 +71,37 @@ class DAO{
             return $this->conexion->affected_rows;
         }
     }
+    public function buscarUsuarios($filtros=array()){
+        $ftexto='';
+        $filas='';//limitar la cantidad de filas a devolver
+        extract($filtros);
+
+        $SQL="SELECT * ";
+        $SQL.="FROM usuarios
+                WHERE 1=1 ";
+        if($ftexto!=''){
+            $aTexto=explode(' ', $ftexto);
+            $SQL.=" AND ( 1=2 ";
+            foreach ($aTexto as $palabra) {
+                $SQL.=" || nombre LIKE '%$palabra%'  
+                        || apellido_1 LIKE '%$palabra%'  
+                        || apellido_2 LIKE '%$palabra%'  
+                        || mail LIKE '%$palabra%'  
+                        || login LIKE '%$palabra%' ";
+            }
+            $SQL.=" ) ";
+        }
+        $SQL.=" ORDER BY apellido_1, apellido_2, nombre, login ";
+        if($filas!=''){
+            $SQL.=" LIMIT $filas ";
+        }
+
+        $usuarios=$this->DAO->consultar($SQL);
+
+        return $usuarios;
+
+    }
+
 
 }
 ?>

@@ -40,7 +40,13 @@ class M_Menu extends Modelo
         return $menuEncontrado;
     }
 
+    public function buscarDatosUsuarios()
+    {
 
+        $SQL = "SELECT * FROM usuario;";
+        $usuariosEncontrados = $this->DAO->consultar($SQL);
+        return $menuEncontrado;
+    }
     public function buscarDatosEditar($menu)
     {
         $idMenu = '';
@@ -188,6 +194,33 @@ class M_Menu extends Modelo
 //        $permisos['nombre_opcion'] = $nombreOpcion;
         return $permisosEncontrados;
     }
+
+    public function buscarRoles($filtros)
+    {
+        $fnombre = "";
+        extract($filtros);
+        $SQL = "SELECT id_Usuario FROM usuario WHERE 1=1 ";
+        //echo $SQL;
+        if ($fnombre != '') {
+            $arrayTexto = array();
+            $arrayTexto = explode(' ', $fnombre);
+            $SQL .= " AND ( 1=2 ";
+            foreach ($arrayTexto as $palabra) {
+                $SQL .= "OR nombre LIKE '%$palabra%' OR mail LIKE '%$palabra%' OR login LIKE '%$palabra%' OR apellido1 LIKE '%$palabra%' OR apellido2 LIKE '%$palabra%' )";
+
+            }
+
+        }
+        $SQL .= ";";
+        //Guarda el contenido del array que trae los datos de la query
+        $usuarios = $this->DAO->consultar($SQL);
+        extract($usuarios);
+        $SQL2="SELECT * FROM roles WHERE id_Uçççççççççççççççççççççççççççççççççsuario='$id_Usuario';";
+
+
+        return $usuarios;
+    }
+
 
     public function buscarPermiso($datos)
     {

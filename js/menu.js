@@ -227,6 +227,7 @@ function recargarPermisos(id){
     })
 }
 
+
 function refrescar(){
 let parametros = '&controlador=Menu&metodo=refrescar';
     console.log(parametros);
@@ -242,6 +243,23 @@ let parametros = '&controlador=Menu&metodo=refrescar';
     })
 
 }
+
+function buscarRoles() {
+    var parametros = '&controlador=Menu&metodo=buscarRoles';
+
+    //Mediamter el serialize me añade todos los campos que tenga el form y su contenido
+    parametros += '&' + $('#formularioBuscarRoles').serialize();
+    $.ajax({
+        url: 'C_Ajax.php',
+        type: 'post',
+        data: parametros,
+        success: function (vista) {
+            $('#rolesUsuario').html(vista);
+        }
+    })
+}
+
+
 
 
 
