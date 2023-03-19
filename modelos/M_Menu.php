@@ -47,6 +47,7 @@ class M_Menu extends Modelo
         $usuariosEncontrados = $this->DAO->consultar($SQL);
         return $menuEncontrado;
     }
+
     public function buscarDatosEditar($menu)
     {
         $idMenu = '';
@@ -209,16 +210,30 @@ class M_Menu extends Modelo
                 $SQL .= "OR nombre LIKE '%$palabra%' OR mail LIKE '%$palabra%' OR login LIKE '%$palabra%' OR apellido1 LIKE '%$palabra%' OR apellido2 LIKE '%$palabra%' )";
 
             }
+            $SQL .= ";";
+//        echo $SQL;
+            //Guarda el contenido del array que trae los datos de la query
+            $id = $this->DAO->consultar($SQL);
+            $id_User = $id[0]['id_Usuario'];
+//        var_dump($id);
+//        echo $id_User;
+            if($id_User == null){
+               return 0;
+            }else{
+                $SQL2 = "SELECT id_Permiso FROM permisos_usuario WHERE 1=1 AND id_Usuario='$id_User';";
+                $roles = $this->DAO->consultar($SQL2);
+                if($roles == null){
+                    return 0;
+                }else{
+                    return $this->verPermisosUsuario($roles);
+                }
+            }
 
+
+        }else{
+            return 0;
         }
-        $SQL .= ";";
-        //Guarda el contenido del array que trae los datos de la query
-        $usuarios = $this->DAO->consultar($SQL);
-        extract($usuarios);
-        $SQL2="SELECT * FROM roles WHERE id_Uçççççççççççççççççççççççççççççççççsuario='$id_Usuario';";
 
-
-        return $usuarios;
     }
 
 
@@ -245,7 +260,7 @@ class M_Menu extends Modelo
         json_encode($tipoPermiso);
         $SQL = "DELETE FROM permisos WHERE 1=1 AND id_opcion='" . $idOpcion . "'AND id_permiso='" . $idPermiso . "' AND permiso='" . $tipoPermiso . "';";
         $permisosEncontrados = $this->DAO->borrar($SQL);
-        if($permisosEncontrados <> null){
+        if ($permisosEncontrados <> null) {
             echo '<br>';
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert" >
              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -279,6 +294,18 @@ class M_Menu extends Modelo
             return 0;
         }
 
+    }
+
+    public function verPermisosUsuario($roles){
+        $SQL = "SELECT * FROM roles WHERE 1=1 AND id_Rol IN (";
+        foreach ($roles as $rol){
+            $SQL .= $rol['id_Permiso'].",";
+        }
+        $SQL = substr($SQL, 0, -1);
+        $SQL .= ");";
+//       / echo $SQL;
+        $permisos = $this->DAO->consultar($SQL);
+        return $permisos;
     }
 }
 
