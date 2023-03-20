@@ -78,7 +78,7 @@ class M_Usuarios extends Modelo
         if ($filas != '') {
             $SQL .= " LIMIT $filas ";
         }
-echo $SQL;
+
         $usuarios = $this->DAO->consultar($SQL);
 
         return $usuarios;

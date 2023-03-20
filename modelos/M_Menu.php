@@ -159,8 +159,8 @@ class M_Menu extends Modelo
         extract($datosNuevo);
         $SQL = "INSERT INTO menu (nombreMenu,posicionMenu,acceso,Funcion,orden) VALUES ('$fnombreMenu','$fposicionMenu','$faccess','$ffuncion','$forder');";
         $idMenus = $this->DAO->insertar($SQL);
-        $SQL= "UPDATE menu SET orden=(orden+1) WHERE orden>$forder;";
-         $this->DAO->actualizar($SQL);
+        $SQL = "UPDATE menu SET orden=(orden+1) WHERE orden>$forder;";
+        $this->DAO->actualizar($SQL);
 
         $SQL1 = "INSERT INTO permisos (id_permiso,id_opcion,num_Permiso,permiso) VALUES ('',$idMenus,1,'Editar')
                                                                      ,('',$idMenus,2,'Consultar')
@@ -198,45 +198,50 @@ class M_Menu extends Modelo
 
     public function buscarRoles($filtros)
     {
-        $fnombre = "";
+        $fid_Usuario = '';
+        $fid_roles = '';
         extract($filtros);
-        $SQL = "SELECT id_Usuario FROM usuario WHERE 1=1 ";
-        //echo $SQL;
-        if ($fnombre != '') {
-            $arrayTexto = array();
-            $arrayTexto = explode(' ', $fnombre);
-            $SQL .= " AND ( 1=2 ";
-            foreach ($arrayTexto as $palabra) {
-                $SQL .= "OR nombre LIKE '%$palabra%' OR mail LIKE '%$palabra%' OR login LIKE '%$palabra%' OR apellido1 LIKE '%$palabra%' OR apellido2 LIKE '%$palabra%' )";
-
-            }
-            $SQL .= ";";
-            //Guarda el contenido del array que trae los datos de la query
-            $id = $this->DAO->consultar($SQL);
-
-//        var_dump($id);
-//        echo $id_User;
-            if($id == null){
-               return 0;
-            }else{
-                $id_User = $id[0]['id_Usuario'];
-                $SQL2 = "SELECT id_Permiso FROM permisos_usuario WHERE 1=1 AND id_Usuario='$id_User';";
-                $roles = $this->DAO->consultar($SQL2);
-                if($roles == null){
+        if ($fid_Usuario . length > 0 && $fid_roles . length > 0) {
+            return 0;
+        } else {
+            if ($fid_Usuario != null && $fid_roles == null) {
+                $SQL = "SELECT * FROM permisos_usuario WHERE 1=1 AND id_Usuario='" . $fid_Usuario . "';";
+                echo $SQL;
+                $rolesEncontrados = $this->DAO->consultar($SQL);
+                if ($rolesEncontrados != null) {
+                    var_dump($rolesEncontrados);
+                    $id_Permiso = "";
+                    for ($i = 0; $i < count($rolesEncontrados); $i++) {
+                        $SQL = "SELECT * FROM roles WHERE 1=1 AND id_permiso='" . $rolesEncontrados[$i]['id_Permiso'] . "';";
+                        $rolesEncontrados = $this->DAO->consultar($SQL);
+                        return $rolesEncontrados;
+                    }
+                } else {
                     return 0;
-                }else{
-                    return $this->verPermisosUsuario($roles);
+                }
+
+
+            } else if ($fid_Usuario == null && $fid_roles != null) {
+                $SQL = "SELECT * FROM permisos_usuario WHERE 1=1 AND id_Permiso='" . $fid_roles . "';";
+                echo $SQL;
+                $rolesEncontrados = $this->DAO->consultar($SQL);
+                if ($rolesEncontrados != null) {
+                    var_dump($rolesEncontrados);
+                    $id_Permiso = "";
+                    for ($i = 0; $i < count($rolesEncontrados); $i++) {
+                        $SQL = "SELECT * FROM roles WHERE 1=1 AND id_permiso='" . $rolesEncontrados[$i]['id_Permiso'] . "';";
+                        $rolesEncontrados = $this->DAO->consultar($SQL);
+                        return $rolesEncontrados;
+                    }
+                } else {
+                    return 0;
                 }
             }
-
-
-        }else{
-            return 0;
         }
-
     }
 
-public function buscarNombreUsuario($datos)
+    public
+    function buscarNombreUsuario($datos)
     {
         $idUsuario = '';
         extract($datos);
@@ -246,7 +251,9 @@ public function buscarNombreUsuario($datos)
         return $nombreUsuario;
     }
 
-    public function buscarIdUsuario($datos){
+    public
+    function buscarIdUsuario($datos)
+    {
         $fnombre = '';
         extract($datos);
         $SQL = "SELECT id_Usuario FROM usuario WHERE 1=1 ";
@@ -262,15 +269,17 @@ public function buscarNombreUsuario($datos)
             $SQL .= ";";
             //Guarda el contenido del array que trae los datos de la query
             $id = $this->DAO->consultar($SQL);
-            $dataUser= $this->buscarNombreUsuario($id);
-            if($dataUser == null){
+            $dataUser = $this->buscarNombreUsuario($id);
+            if ($dataUser == null) {
                 return 0;
-            }else{
+            } else {
                 return $dataUser;
             }
         }
     }
-    public function buscarPermiso($datos)
+
+    public
+    function buscarPermiso($datos)
     {
         $idOpcion = '';
         extract($datos);
@@ -282,7 +291,8 @@ public function buscarNombreUsuario($datos)
         return $permisosEncontrados;
     }
 
-    public function borrarPermisos($datos)
+    public
+    function borrarPermisos($datos)
     {
         $idOpcion = '';
         $idPermiso = '';
@@ -308,7 +318,8 @@ public function buscarNombreUsuario($datos)
         return $permisosEncontrados;
     }
 
-    public function crearPermiso($datos)
+    public
+    function crearPermiso($datos)
     {
         $fnPermiso = '';
         $fidOpcion = '';
@@ -329,10 +340,12 @@ public function buscarNombreUsuario($datos)
 
     }
 
-    public function verPermisosUsuario($roles){
+    public
+    function verPermisosUsuario($roles)
+    {
         $SQL = "SELECT * FROM roles WHERE 1=1 AND id_Rol IN (";
-        foreach ($roles as $rol){
-            $SQL .= $rol['id_Permiso'].",";
+        foreach ($roles as $rol) {
+            $SQL .= $rol['id_Permiso'] . ",";
         }
         $SQL = substr($SQL, 0, -1);
         $SQL .= ");";

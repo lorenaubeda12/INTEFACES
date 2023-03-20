@@ -141,14 +141,14 @@ class C_Menu extends Controlador
     {
 
         $datosPermiso = $this->modelo->buscarRoles($datos);
-        $nombreUsuario= $this->modelo->buscarIdUsuario($datos);
+
         if($datosPermiso == 0)
         {
             Vista::render('vistas/error2.php');
         }
         else
         {
-//            Vista::render('vistas/Menu/V_RolesUsuario.php',$datosPermiso,$nombreUsuario);
+         Vista::render('vistas/Menu/V_RolesUsuario.php',$datosPermiso);
 
 
         }

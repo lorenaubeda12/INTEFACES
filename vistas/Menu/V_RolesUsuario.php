@@ -5,10 +5,10 @@
 
 echo ' <div class="card" style="margin-left: 3rem; margin-bottom: 2rem; margin-top: 1rem"+>
   <div class="card-header">
-    Permisos
+    Roles de usuario
   </div>
   <div class="card-body">';
-echo '<h5 class="card-title">Permisos </h5> 
+echo '<h5 class="card-title">Roles </h5> 
         <form name="formularioModificarDatosMenu" id="formularioModificarDatosMenu" readonly class="form-control-plaintext">
          <div class="row mx-auto">
          <div class="col-lg-10">
