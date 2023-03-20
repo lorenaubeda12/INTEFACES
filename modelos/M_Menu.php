@@ -159,8 +159,8 @@ class M_Menu extends Modelo
         extract($datosNuevo);
         $SQL = "INSERT INTO menu (nombreMenu,posicionMenu,acceso,Funcion,orden) VALUES ('$fnombreMenu','$fposicionMenu','$faccess','$ffuncion','$forder');";
         $idMenus = $this->DAO->insertar($SQL);
-        //$SQL= "UPDATE menu SET orden=(orden+1) WHERE orden>$forder;";
-        // $this->DAO->actualizar($SQL);
+        $SQL= "UPDATE menu SET orden=(orden+1) WHERE orden>$forder;";
+         $this->DAO->actualizar($SQL);
 
         $SQL1 = "INSERT INTO permisos (id_permiso,id_opcion,num_Permiso,permiso) VALUES ('',$idMenus,1,'Editar')
                                                                      ,('',$idMenus,2,'Consultar')
@@ -211,15 +211,15 @@ class M_Menu extends Modelo
 
             }
             $SQL .= ";";
-//        echo $SQL;
             //Guarda el contenido del array que trae los datos de la query
             $id = $this->DAO->consultar($SQL);
-            $id_User = $id[0]['id_Usuario'];
+
 //        var_dump($id);
 //        echo $id_User;
-            if($id_User == null){
+            if($id == null){
                return 0;
             }else{
+                $id_User = $id[0]['id_Usuario'];
                 $SQL2 = "SELECT id_Permiso FROM permisos_usuario WHERE 1=1 AND id_Usuario='$id_User';";
                 $roles = $this->DAO->consultar($SQL2);
                 if($roles == null){
@@ -236,7 +236,40 @@ class M_Menu extends Modelo
 
     }
 
+public function buscarNombreUsuario($datos)
+    {
+        $idUsuario = '';
+        extract($datos);
 
+        $SQL = "SELECT nombre,apellido1,apellido2 FROM usuario WHERE 1=1 AND id_Usuario ='" . $idUsuario . "';";
+        $nombreUsuario = $this->DAO->consultar($SQL);
+        return $nombreUsuario;
+    }
+
+    public function buscarIdUsuario($datos){
+        $fnombre = '';
+        extract($datos);
+        $SQL = "SELECT id_Usuario FROM usuario WHERE 1=1 ";
+        //echo $SQL;
+        if ($fnombre != '') {
+            $arrayTexto = array();
+            $arrayTexto = explode(' ', $fnombre);
+            $SQL .= " AND ( 1=2 ";
+            foreach ($arrayTexto as $palabra) {
+                $SQL .= "OR nombre LIKE '%$palabra%' OR mail LIKE '%$palabra%' OR login LIKE '%$palabra%' OR apellido1 LIKE '%$palabra%' OR apellido2 LIKE '%$palabra%' )";
+
+            }
+            $SQL .= ";";
+            //Guarda el contenido del array que trae los datos de la query
+            $id = $this->DAO->consultar($SQL);
+            $dataUser= $this->buscarNombreUsuario($id);
+            if($dataUser == null){
+                return 0;
+            }else{
+                return $dataUser;
+            }
+        }
+    }
     public function buscarPermiso($datos)
     {
         $idOpcion = '';

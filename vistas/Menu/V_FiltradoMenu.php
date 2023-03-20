@@ -5,6 +5,7 @@
 </button>
 
 <button type="button" class="btn btn-secondary" data-toggle="collapse"  role="button" style="margin-top:0.5rem"
-        aria-expanded="false" onclick="getVista('Menu','obtenerVistaUsuarios');">Usuarios
+aria-expanded="false" onclick="getVista('Menu','obtenerVistaUsuarios');">Usuarios
+
 </button>
 

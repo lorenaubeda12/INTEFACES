@@ -1,10 +1,9 @@
 <?php
-
 if(!empty($datos['usuarios'])) {
     $pal=explode(' ', $datos['query']);
     echo '<ul>'."\n";
     foreach( $datos['usuarios'] as $reg){
-        $nombre=mb_strtoupper($reg['apellido1'].' '.$reg['apellido2'].', '.$reg['nombre']);
+        $nombre=mb_strtoupper($reg['apellido_1'].' '.$reg['apellido_2'].', '.$reg['nombre']);
         $nombreplano=$nombre;
         foreach ($pal as $npal => $palabra) {
             $palabra=mb_strtoupper($palabra);

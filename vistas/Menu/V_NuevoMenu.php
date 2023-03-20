@@ -18,7 +18,7 @@ echo '<h5 class="card-title">Nuevo</h5>
                 </div>
                 <div class="col-lg-3">
                     <label for="fposicionMenu">Posición del menú</label>
-                    <input type="text" name="forder" id="fposicionMenu" class="form-control col-4">
+                    <input type="text" name="fposicionMenu" id="fposicionMenu" class="form-control col-4">
                             </div> 
                             <div class="col-lg-2">
                     <label for="forder">Orden del menu</label>

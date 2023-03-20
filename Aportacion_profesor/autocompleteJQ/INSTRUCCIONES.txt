@@ -1,0 +1,102 @@
+USO DEL autoCompleteJQ
+======================
+
+1.- En la vista donde queramos poner el autocomplete:
+
+	- Incluir los archivos .js y .css:
+	
+		<script type="text/javascript" src="js/autoCompleteJQ.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/autoCompleteJQ.css" />
+	
+	- Poner un objeto html de caja, por ejemplo un DIV con el id que queramos que 
+	tenga el input, poniendo delante "AU_"
+	
+		<div id="div_fid_Usuario" class="div_fid_Usuario">
+		
+	- Llamar a la función para crear el autocomplete:
+	
+		<script type="text/javascript" >
+			comboAutoCompleteJQ('fid_Usuario','Usuarios','comboUsuariosAutoCompleteJQ', 'seleccionadoUsuario','7','20em'); 
+		</script>
+		
+	NOTA: los parámetros son:
+		- Nombre que tendrá el input: fid_Usuario
+		- Controlador: Usuarios
+		- Método: comboUsuariosAutoCompleteJQ  (que buscara los usuarios y renderizará la vista
+		- Función javascript a ejecutar cuando de seleccione/deseleccione un usuario: seleccionadoUsuario
+		- Filas que muestra el desplegable: 7
+		- Tamaño, ancho del input. Indicar unidad de medida css: 20em
+	
+2.- Cambiar la ruta en el fichero autoCompleteJQ.js, en la línea 3, según la carpeta de nuestra aplicación:
+
+	var dirBase='/2si'; 
+
+3.- El método llamara al modelo para buscar los usuarios:
+
+		public function comboUsuariosAutoCompleteJQ($datos){ 
+			//consultar BD, los usuarios
+			$datos['usuarios']=$this->modelo->buscarUsuarios(array('ftexto'=>$datos['query'],
+
+			//generar la vista de resultados
+			Vista::render('vistas/Usuarios/V_Usuarios_comboAutocomplete.php', $datos);
+		}
+		
+4.- El modelo, con la función para buscar adaptada (pongo lo importante):
+
+    public function buscarUsuarios($filtros=array()){
+        $ftexto='';
+        ...
+        $filas='';//limitar la cantidad de filas a devolver
+        extract($filtros);
+
+        $SQL="SELECT * ";
+        $SQL.="FROM usuarios
+                WHERE 1=1 ";
+        if($ftexto!=''){
+            $aTexto=explode(' ', $ftexto);
+            $SQL.=" AND ( 1=2 ";
+            foreach ($aTexto as $palabra) {
+                $SQL.=" || nombre LIKE '%$palabra%'  
+                        || apellido_1 LIKE '%$palabra%'  
+                        || apellido_2 LIKE '%$palabra%'  
+                        || mail LIKE '%$palabra%'  
+                        || login LIKE '%$palabra%' ";
+            }
+            $SQL.=" ) ";
+        }
+        ...
+        $SQL.=" ORDER BY apellido_1, apellido_2, nombre, login ";
+        if($filas!=''){
+            $SQL.=" LIMIT $filas ";
+        }
+
+        $usuarios=$this->DAO->consultar($SQL);
+
+        return $usuarios;
+
+    }
+	
+5.- La vista:
+
+	<?php
+	if(!empty($datos['usuarios'])) { 
+		$pal=explode(' ', $datos['query']);
+		echo '<ul>'."\n";
+		foreach( $datos['usuarios'] as $reg){
+			$nombre=mb_strtoupper($reg['apellido_1'].' '.$reg['apellido_2'].', '.$reg['nombre']);
+			$nombreplano=$nombre;
+			foreach ($pal as $npal => $palabra) {
+				$palabra=mb_strtoupper($palabra);
+				$nombre=str_ireplace($palabra, 
+						'<span style="font-weight:bold;color:blue;">'
+						.$palabra.'</span>', $nombre);
+			}
+			echo "\t".'<li id="autocomplete_'.$reg['id_Usuario'].'" rel="'
+						.$reg['id_Usuario'].'_'
+						.mb_convert_encoding($nombreplano, 'ISO-8859-1').'">';
+			echo trim(mb_convert_encoding($nombre, 'ISO-8859-1')).'</li>'."\n";
+		
+		}
+		echo '</ul>';
+	}
+	?>

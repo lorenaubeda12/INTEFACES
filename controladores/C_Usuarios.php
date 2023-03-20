@@ -120,12 +120,21 @@ class C_Usuarios extends Controlador
 
 
     }
+    public function comboUsuariosAutoCompleteJQ($datos){
+        //consultar BD, los usuarios
+        $datos['usuarios']=$this->modelo->buscarUsuarios2(array('ftexto'=>$datos['query']));
+            //generar la vista de resultados
+            Vista::render('vistas/Usuarios/V_Usuarios_comboAutocomplete.php', $datos);
+    }
     public function obtenerMenu($tipoMenu){
         $prueba = $this->modelo->buscarMenu($tipoMenu);
         Vista::render('vistas/Usuarios/V_MenuIndex.php', $prueba);
 
 
     }
+
+
+
 }
 
 ?>

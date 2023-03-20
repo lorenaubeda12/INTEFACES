@@ -56,6 +56,7 @@ foreach ($datos as $key => $datosMenu) {
     }
     echo '   </select>
    </div>
+   <div id="success"></div>
     <button type="button" onclick="actualizarMenu(' . $datosMenu['idMenu'] . ');" class="btn btn-primary float-lg-right " style="margin-top: 2rem">Guardar</button>
    <button type="button" class="btn btn-primary float-lg-right refrescar " style="margin-top: 2rem; margin-left:4rem" onclick="cerrarMenu(' . $datosMenu['idMenu'] . ')">Cerrar</button>
    </div>

@@ -51,6 +51,40 @@ class M_Usuarios extends Modelo
         return $usuarios;
     }
 
+    public function buscarUsuarios2($filtros = array())
+    {
+        $ftexto = '';
+
+        $filas = '';//limitar la cantidad de filas a devolver
+        extract($filtros);
+
+        $SQL = "SELECT * ";
+        $SQL .= "FROM usuario
+                WHERE 1=1 ";
+        if ($ftexto != '') {
+
+            $arrayTexto = array();
+            $arrayTexto = explode(' ', $ftexto);
+            $SQL .= " AND ( 1=2 ";
+            foreach ($arrayTexto as $palabra) {
+                $SQL .= " OR nombre LIKE '%$palabra%' OR mail LIKE '%$palabra%' OR login LIKE '%$palabra%' OR apellido1 LIKE '%$palabra%' OR apellido2 LIKE '%$palabra%'  ";
+
+            }
+            $SQL .= " ) ";
+        }
+
+        $SQL .= " ORDER BY apellido1, apellido2, nombre, login ";
+
+        if ($filas != '') {
+            $SQL .= " LIMIT $filas ";
+        }
+echo $SQL;
+        $usuarios = $this->DAO->consultar($SQL);
+
+        return $usuarios;
+
+    }
+
     public function UpdateDatos($filtros)
     {
         $fidUsuario = '';
@@ -257,10 +291,11 @@ class M_Usuarios extends Modelo
         //consultar BD, los usuarios
         $datos['usuarios'] = $this->modelo->buscarUsuarios(array('ftexto' => $datos['query'],
 
-            //generar la vista de resultados
-            Vista::render('vistas/Usuarios/V_Usuarios_comboAutocomplete.php', $datos)
-        )
-        );}
+                //generar la vista de resultados
+                Vista::render('vistas/Usuarios/V_Usuarios_comboAutocomplete.php', $datos)
+            )
+        );
+    }
 }
 
 ?>

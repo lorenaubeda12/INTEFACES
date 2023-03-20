@@ -79,7 +79,6 @@ class C_Menu extends Controlador
 
     public function getVistaNuevoMenu($idMenu)
     {
-        ;
         Vista::render('vistas/Menu/V_NuevoMenu.php', $idMenu);
 
     }
@@ -89,6 +88,7 @@ class C_Menu extends Controlador
 
         $this->modelo->aniadirMenu($datosNuevos);
         Vista::render('vistas/Menu/V_ImprimirDatosMenu.php');
+
 
     }
 
@@ -141,13 +141,16 @@ class C_Menu extends Controlador
     {
 
         $datosPermiso = $this->modelo->buscarRoles($datos);
+        $nombreUsuario= $this->modelo->buscarIdUsuario($datos);
         if($datosPermiso == 0)
         {
             Vista::render('vistas/error2.php');
         }
         else
         {
-            Vista::render('vistas/Menu/V_RolesUsuario.php',$datosPermiso);
+//            Vista::render('vistas/Menu/V_RolesUsuario.php',$datosPermiso,$nombreUsuario);
+
+
         }
 
 

@@ -86,6 +86,7 @@ function cerrarPermiso(idPermiso) {
 }
 
 function guardarMenu() {
+    alert("Estoy en guardarMenu");
     var parametros = '&controlador=Menu&metodo=aniadirNuevoMenu';
     parametros += '&' + $('#formularioNuevoMenu').serialize();
     console.log(parametros);

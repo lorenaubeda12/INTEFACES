@@ -1,6 +1,6 @@
 //function comboAutoCompleteJQ(nombrecombo, controlador, metodo, funcionchange, filas, ancho, parametros) 
 function comboAutoCompleteJQ(nombrecombo, controlador, metodo, funcionchange, filas, ancho) {
-	var dirBase='/Interfaces/BLASCO_UBEDA_ANALORENA_INTERFACES_1EVA';
+	var dirBase='/2si_casa';
 	
     var splitSeleccionado;
 	var teclaVirtual=false;
