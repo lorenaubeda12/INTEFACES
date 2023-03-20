@@ -200,11 +200,13 @@ class M_Menu extends Modelo
     {
         $fid_Usuario = '';
         $fid_roles = '';
+
         extract($filtros);
-        if ($fid_Usuario . length > 0 && $fid_roles . length > 0) {
-            return 0;
-        } else {
-            if ($fid_Usuario != null && $fid_roles == null) {
+        var_dump($filtros);
+        /*var_dump($fid_Usuario);
+        var_dump($fid_roles);*/
+        var_dump(strlen($fid_Usuario)<0 AND strlen($fid_roles)>0);
+            if ($fid_Usuario != null && $fid_roles != null) {
                 $SQL = "SELECT * FROM permisos_usuario WHERE 1=1 AND id_Usuario='" . $fid_Usuario . "';";
                 echo $SQL;
                 $rolesEncontrados = $this->DAO->consultar($SQL);
@@ -213,6 +215,7 @@ class M_Menu extends Modelo
                     $id_Permiso = "";
                     for ($i = 0; $i < count($rolesEncontrados); $i++) {
                         $SQL = "SELECT * FROM roles WHERE 1=1 AND id_permiso='" . $rolesEncontrados[$i]['id_Permiso'] . "';";
+                        echo $SQL;
                         $rolesEncontrados = $this->DAO->consultar($SQL);
                         return $rolesEncontrados;
                     }
@@ -221,7 +224,7 @@ class M_Menu extends Modelo
                 }
 
 
-            } else if ($fid_Usuario == null && $fid_roles != null) {
+            } else if ($fid_Usuario == '' && $fid_roles != null) {
                 $SQL = "SELECT * FROM permisos_usuario WHERE 1=1 AND id_Permiso='" . $fid_roles . "';";
                 echo $SQL;
                 $rolesEncontrados = $this->DAO->consultar($SQL);
@@ -230,6 +233,7 @@ class M_Menu extends Modelo
                     $id_Permiso = "";
                     for ($i = 0; $i < count($rolesEncontrados); $i++) {
                         $SQL = "SELECT * FROM roles WHERE 1=1 AND id_permiso='" . $rolesEncontrados[$i]['id_Permiso'] . "';";
+                        echo $SQL;
                         $rolesEncontrados = $this->DAO->consultar($SQL);
                         return $rolesEncontrados;
                     }
@@ -237,11 +241,10 @@ class M_Menu extends Modelo
                     return 0;
                 }
             }
-        }
+
     }
 
-    public
-    function buscarNombreUsuario($datos)
+    public  function buscarNombreUsuario($datos)
     {
         $idUsuario = '';
         extract($datos);

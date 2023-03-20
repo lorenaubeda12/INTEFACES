@@ -250,7 +250,7 @@ function buscarRoles() {
     //Mediamter el serialize me añade todos los campos que tenga el form y su contenido
     parametros+= '&fid_Usuario='+$('#fid_Usuario').val();
     parametros+= '&fid_rol='+$('#fid_Rol').val();
-   //alert(parametros);
+   alert(parametros);
     $.ajax({
         url: 'C_Ajax.php',
         type: 'post',
