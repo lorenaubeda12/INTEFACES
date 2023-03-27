@@ -10,7 +10,8 @@ echo '
 <form id="formularioBuscar" name="formularioBuscar">
     <label for="fid_Rol">Rol</label>
     <select id="fid_Rol" class="form-control col-lg-3">
-        <option value="2" selected>Usuario básico</option>
+        <option value="">Selecciona</option>
+        <option value="2" >Usuario básico</option>
         <option value="1">Administrador</option>
         <option value="3">Gestor</option>
         <option value="4">Editor</option>
@@ -22,7 +23,7 @@ echo '
        <div id="AU_fid_Usuario"></div>
        </div>
    ';
-        ?>
+?>
 </form>
 <?php
 echo '
@@ -37,11 +38,7 @@ echo '
 <br>
 
 <div id="capaResultadosBusqueda"></div>
-<div id="capaEdicionNuevo" style="display:none;">
 
-    <script type="text/javascript">
-        comboAutoCompleteJQ('fid_Usuario', 'Usuarios', 'comboUsuariosAutoCompleteJQ', 'seleccionadoUsuario', '7', '20em');
-    </script>
-
-
-    ?>
+<script type="text/javascript">
+    comboAutoCompleteJQ('fid_Usuario', 'Usuarios', 'comboUsuariosAutoCompleteJQ', 'seleccionadoUsuario', '7', '20em');
+</script>
