@@ -199,9 +199,9 @@ class M_Menu extends Modelo
     public function buscarRoles($filtros)
     {
         $fid_Usuario = '';
-        $fid_roles = '';
+        $fid_rol = '';
         extract($filtros);
-            if ($fid_Usuario != null && $fid_roles == "") {
+            if ($fid_Usuario != null && $fid_rol == "") {
                 $SQL = "SELECT * FROM permisos_usuario WHERE 1=1 AND id_Usuario='" . $fid_Usuario . "';";
                 $rolesEncontrados = $this->DAO->consultar($SQL);
                 if ($rolesEncontrados != null) {
@@ -216,16 +216,15 @@ class M_Menu extends Modelo
                     return 0;
                 }
 
-            } else if ($fid_Usuario == '' && $fid_roles != null) {
-                $SQL = "SELECT * FROM permisos_usuario WHERE 1=1 AND id_Permiso='" . $fid_roles . "';";
-               echo $SQL;
+            }
+
+            if ( $fid_rol != null && $fid_Usuario == "") {
+                $SQL = "SELECT * FROM permisos_usuario WHERE 1=1 AND id_Permiso='" . $fid_rol . "';";
                 $rolesEncontrados = $this->DAO->consultar($SQL);
                 if ($rolesEncontrados != null) {
                     $id_Permiso = "";
                     for ($i = 0; $i < count($rolesEncontrados); $i++) {
-                       echo var_dump($rolesEncontrados[$i]['id_Permiso']);
-                        $SQL = "SELECT * FROM roles WHERE 1=1 AND id_rol='" . $rolesEncontrados[$i]['id_Permiso'] . "';";
-                        echo $SQL;
+                        $SQL = "SELECT * FROM roles WHERE 1=1 AND id_Rol='" . $rolesEncontrados[$i]['id_Permiso'] . "';";
                         $rolesEncontrados = $this->DAO->consultar($SQL);
                         return $rolesEncontrados;
                     }
@@ -235,7 +234,6 @@ class M_Menu extends Modelo
             }else{
                 return 0;
             }
-
     }
 
     public  function buscarNombreUsuario($datos)
